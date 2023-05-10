@@ -12,6 +12,7 @@ import React, {useState} from 'react';
 // Import our components. See the components directory
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import navigationContainer from "@react-navigation/native/src/NavigationContainer";
 
 
 
@@ -26,56 +27,49 @@ homescreen with nav menu
 function HomeScreen({ navigation }) {
 
     return(
-        <SafeAreaView styles={{backgroundColor: "#BEFCE0"}}>
-
-            <ScrollView>
-                <View >
-                    <View style={styles.container}>
-                        <Pressable onPress={() => navigation.navigate('To-do List')}>
-                            <View style={{ ...styles.nav_button, backgroundColor: "#CBCAE3" }}>
-                                <Text style={styles.nav_button_text}>To-do List</Text>
-                            </View>
-                        </Pressable>
-                        <Pressable onPress={() => navigation.navigate('Diary')}>
-                            <View style={{ ...styles.nav_button, backgroundColor: "#BEFCFC" }}>
-                                <Text style={styles.nav_button_text}>Diary</Text>
-                            </View>
-                        </Pressable>
-                        <Pressable onPress={() => navigation.navigate('Graph')}>
-                            <View style={{ ...styles.nav_button, backgroundColor: "#FCF6BE" }}>
-                                <Text style={styles.nav_button_text}>Graph</Text>
-                            </View>
-                        </Pressable>
-                        <View style={{ ...styles.nav_button, backgroundColor: "#FCBEBE" }}>
-                            <Pressable onPress={() => navigation.navigate('Rewards')}>
-                                <Text style={styles.nav_button_text}>Rewards</Text>
-                            </Pressable>
+        <SafeAreaView>
+            <ScrollView contentContainerStyle={styles.scroll_container}>
+                <View style={{...styles.container}}>
+                    <Pressable onPress={() => navigation.navigate('To-do List')}>
+                        <View style={{ ...styles.nav_button, backgroundColor: "#CBCAE3" }}>
+                            <Text style={styles.nav_button_text}>To-do List</Text>
                         </View>
+                    </Pressable>
+                    <Pressable onPress={() => navigation.navigate('Diary')}>
+                        <View style={{ ...styles.nav_button, backgroundColor: "#BEFCFC" }}>
+                            <Text style={styles.nav_button_text}>Diary</Text>
+                        </View>
+                    </Pressable>
+                    <Pressable onPress={() => navigation.navigate('Graph')}>
+                        <View style={{ ...styles.nav_button, backgroundColor: "#FCF6BE" }}>
+                            <Text style={styles.nav_button_text}>Graph</Text>
+                        </View>
+                    </Pressable>
 
 
+                    <Pressable onPress={() => navigation.navigate('Rewards')}>
+                        <View style={{ ...styles.nav_button, backgroundColor: "#FCBEBE" }}>
+                            <Text style={styles.nav_button_text}>Rewards</Text>
+                        </View>
+                    </Pressable>
 
-                        <Pressable
-                             onPress={() => navigation.navigate('Goals')}>
-                            <View style={{...styles.nav_button, backgroundColor: "#F8DAC4",}}>
-                                <Text style={styles.nav_button_text}>Goals</Text>
-                            </View>
-                        </Pressable>
-
-
-
-
-
-                        <Pressable
-                            onPress={() => navigation.navigate('Settings')}>
-                            <View style={{...styles.nav_button, backgroundColor: "#CAFFCC",}}>
+                    <Pressable
+                        onPress={() => navigation.navigate('Goals')}>
+                        <View style={{...styles.nav_button, backgroundColor: "#F8DAC4",}}>
+                            <Text style={styles.nav_button_text}>Goals</Text>
+                        </View>
+                    </Pressable>
+                    <Pressable
+                        onPress={() => navigation.navigate('Settings')}>
+                        <View style={{...styles.nav_button, backgroundColor: "#CAFFCC",}}>
                             <Text style={styles.nav_button_text}>Settings</Text>
                         </View>
-                        </Pressable>
+                    </Pressable>
 
-                    </View>
                 </View>
             </ScrollView>
         </SafeAreaView>
+
     )
 }
 function ToDoScreen({ navigation }) {
@@ -174,6 +168,7 @@ const styles = StyleSheet.create({
         //alignItems: 'center',
         justifyContent: 'space-between',
         height: "100%",
+        marginTop: "auto"
     },
 
     header: {
@@ -204,7 +199,10 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginVertical: 25,
         marginBottom: 0,
-        elevation: 30
+        elevation: 30,
+        //boarder
+        borderWidth: 2,
+        borderColor: 'rgba(0, 0, 0, 0.2)',
     },
     nav_button_text:{
         fontSize: 30,
@@ -213,5 +211,12 @@ const styles = StyleSheet.create({
     inputs: {
         //flexDirection: "row",
         marginTop: "auto",
+    },
+    scroll_container: {
+        backgroundColor: "#BEFCE0",
+        paddingTop: 40,
+        justifyContent: 'space-between',
+        minHeight: '100%',
+        paddingBottom: 40,
     }
 });
