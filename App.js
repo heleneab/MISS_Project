@@ -5,36 +5,21 @@ import {
     View,
     SafeAreaView,
     StyleSheet,
-    Text, ScrollView,
+    Text, ScrollView, Pressable,
 } from 'react-native';
 import React, {useState} from 'react';
 
 // Import our components. See the components directory
-import Login from "./components/Login";
-import Welcome from "./components/Welcome";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import SignUp from "./components/SignUp";
-import FirstScreen from "./components/FirstScreen";
+import navigationContainer from "@react-navigation/native/src/NavigationContainer";
 
 
 
 // Import our components. See the components directory
 
 
-const App = () => {
-    const [user, setUser] = useState(null);
 
-    // Conditionally show either the welcome component or the login component.
-    if (!user) {
-        // Pass the setUser function as a prop to the child component, so it can set the logged-in user state.
-        return <Login setUser={setUser}/>
-    }
-    else {
-        // Pass the currently logged-in user information to the Welcome component
-        return <Welcome user={user}/>
-    }
-};
 
 /*
 homescreen with nav menu
@@ -43,92 +28,101 @@ function HomeScreen({ navigation }) {
 
     return(
         <SafeAreaView>
+            <ScrollView contentContainerStyle={styles.scroll_container}>
+                <View style={{...styles.container}}>
+                    <Pressable onPress={() => navigation.navigate('To-do List')}>
+                        <View style={{ ...styles.nav_button, backgroundColor: "#CBCAE3" }}>
+                            <Text style={styles.nav_button_text}>To-do List</Text>
+                        </View>
+                    </Pressable>
+                    <Pressable onPress={() => navigation.navigate('Diary')}>
+                        <View style={{ ...styles.nav_button, backgroundColor: "#BEFCFC" }}>
+                            <Text style={styles.nav_button_text}>Diary</Text>
+                        </View>
+                    </Pressable>
+                    <Pressable onPress={() => navigation.navigate('Graph')}>
+                        <View style={{ ...styles.nav_button, backgroundColor: "#FCF6BE" }}>
+                            <Text style={styles.nav_button_text}>Graph</Text>
+                        </View>
+                    </Pressable>
 
-            <ScrollView>
-                <View style={styles.container}>
-                    <View>
-                        <FirstScreen />
-                    </View>
-                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                        <Button
-                            style={styles.button}
-                            title="To-Do List"
-                            onPress={() => navigation.navigate('To-do List')}
-                        />
 
-                    </View>
+                    <Pressable onPress={() => navigation.navigate('Rewards')}>
+                        <View style={{ ...styles.nav_button, backgroundColor: "#FCBEBE" }}>
+                            <Text style={styles.nav_button_text}>Rewards</Text>
+                        </View>
+                    </Pressable>
+
+                    <Pressable
+                        onPress={() => navigation.navigate('Goals')}>
+                        <View style={{...styles.nav_button, backgroundColor: "#F8DAC4",}}>
+                            <Text style={styles.nav_button_text}>Goals</Text>
+                        </View>
+                    </Pressable>
+                    <Pressable
+                        onPress={() => navigation.navigate('Settings')}>
+                        <View style={{...styles.nav_button, backgroundColor: "#CAFFCC",}}>
+                            <Text style={styles.nav_button_text}>Settings</Text>
+                        </View>
+                    </Pressable>
+
                 </View>
             </ScrollView>
         </SafeAreaView>
+
     )
 }
 function ToDoScreen({ navigation }) {
-    return(
-        <SafeAreaView>
-
-            <ScrollView>
-                <View style={styles.container}>
-                    <View>
-                        <SignUp />
-                    </View>
-
-                </View>
-            </ScrollView>
-        </SafeAreaView>
-    )
+    return (
+        <View style={{...styles.container, backgroundColor: "#CBCAE3"}}>
+            <View style = {styles.header}>
+                <Text style = {styles.heading}>Hei! jeg er en setting screen</Text>
+            </View>
+        </View>
+    );
 }
 function DiaryScreen({ navigation }) {
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Button
-                title="Go to Home"
-                onPress={() => navigation.navigate('Home')}
-            />
+        <View style={{...styles.container, backgroundColor: "#BEFCFC"}}>
+            <View style = {styles.header}>
+                <Text style = {styles.heading}>Hei! jeg er en setting screen</Text>
+            </View>
         </View>
     );
 }
 function GraphScreen({ navigation }) {
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Button
-                title="Go to Home"
-                onPress={() => navigation.navigate('Home')}
-            />
+        <View style={{...styles.container, backgroundColor: "#FCF6BE"}}>
+            <View style = {styles.header}>
+                <Text style = {styles.heading}>Hei! jeg er en setting screen</Text>
+            </View>
         </View>
     );
 }
 function RewardsScreen({ navigation }) {
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Button
-                title="Go to Home"
-                onPress={() => navigation.navigate('Home')}
-            />
-            <Button title="Go back" onPress={() => navigation.goBack()} />
+        <View style={{...styles.container, backgroundColor: "#FCBEBE"}}>
+            <View style = {styles.header}>
+                <Text style = {styles.heading}>Hei! jeg er en setting screen</Text>
+            </View>
         </View>
     );
 }
 function GoalsScreen({ navigation }) {
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Button
-                title="Go to Home"
-                onPress={() => navigation.navigate('Settings')}
-            />
-            <Button title="Go back" onPress={() => navigation.goBack()} />
+        <View style={{...styles.container, backgroundColor: "#F8DAC4"}}>
+            <View style = {styles.header}>
+                <Text style = {styles.heading}>Hei! jeg er en setting screen</Text>
+            </View>
         </View>
     );
 }
 function SettingsScreen({ navigation }) {
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{...styles.container, backgroundColor: "#CAFFCC"}}>
             <View style = {styles.header}>
-                <Text style = {styles.heading}>Home</Text>
+                <Text style = {styles.heading}>Hei! jeg er en setting screen</Text>
             </View>
-            <View>
-                Hei! jeg er en setting screen
-            </View>
-            <Button title="Go back" onPress={() => navigation.goBack()} />
         </View>
     );
 }
@@ -152,7 +146,7 @@ function MyStack() {
 
 //export default HomeScreen;
 
-export default function App1() {
+export default function App() {
     return (
 
         <NavigationContainer>
@@ -169,23 +163,14 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: "column",
-        backgroundColor: '#fff',
-        paddingTop: 20,
+        //backgroundColor: '#AAD2C0',
+        paddingTop: 40,
         //alignItems: 'center',
-        //justifyContent: 'center',
+        justifyContent: 'space-between',
+        height: "100%",
+        marginTop: "auto"
     },
-    container2: {
-        flexDirection: "row",
-        backgroundColor: "lightblue",
-        justifyContent: "space-between",
-        padding: 10,
-        //alignItems: "center",
-        width: "90%",
-        alignSelf: "center",
-        borderRadius: 10,
-        marginVertical: 10,
-        marginBottom: 0,
-    },
+
     header: {
         flexDirection: "row",
         width: "90%",
@@ -193,7 +178,8 @@ const styles = StyleSheet.create({
         padding: 10,
         justifyContent: "space-between",
         alignItems: "center",
-        marginBottom: 10,
+        marginTop: 10,
+        marginBottom: "auto"
     },
     heading: {
         fontSize: 30,
@@ -201,20 +187,36 @@ const styles = StyleSheet.create({
         fontWeight: "500",
         flex: 1,
     },
-    button: {
-        color: "black",
-        //fontSize: 17,
-        backgroundColor: "transparent",
-        padding: 7,
-        margin: 20,
+
+    nav_button: {
+        flexDirection: "row",
+        //backgroundColor: "lightblue",
+        justifyContent: "space-between",
+        padding: 10,
+        //alignItems: "center",
         width: "70%",
         alignSelf: "center",
-        borderRadius: 0,
-        flexDirection: "row",
-        borderStyle: "solid",
+        borderRadius: 10,
+        marginVertical: 25,
+        marginBottom: 0,
+        elevation: 30,
+        //boarder
+        borderWidth: 2,
+        borderColor: 'rgba(0, 0, 0, 0.2)',
+    },
+    nav_button_text:{
+        fontSize: 30,
+        marginLeft: 20,
     },
     inputs: {
         //flexDirection: "row",
         marginTop: "auto",
+    },
+    scroll_container: {
+        backgroundColor: "#BEFCE0",
+        paddingTop: 40,
+        justifyContent: 'space-between',
+        minHeight: '100%',
+        paddingBottom: 40,
     }
 });
