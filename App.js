@@ -17,6 +17,8 @@ import navigationContainer from "@react-navigation/native/src/NavigationContaine
 
 
 // Import our components. See the components directory
+import Privacy from "./components/Privacy";
+import Login from "./components/Login";
 
 
 
@@ -63,6 +65,12 @@ function HomeScreen({ navigation }) {
                         onPress={() => navigation.navigate('Settings')}>
                         <View style={{...styles.nav_button, backgroundColor: "#CAFFCC",}}>
                             <Text style={styles.nav_button_text}>Settings</Text>
+                        </View>
+                    </Pressable>
+                    <Pressable
+                        onPress={() => navigation.navigate('Login')}>
+                        <View style={{...styles.nav_button, backgroundColor: "#CAFFCC",}}>
+                            <Text style={styles.nav_button_text}>Login</Text>
                         </View>
                     </Pressable>
 
@@ -126,6 +134,27 @@ function SettingsScreen({ navigation }) {
         </View>
     );
 }
+function LoginScreen({ navigation }) {
+
+    return (
+        <View style={{...styles.container, backgroundColor: "#CAFFCC"}}>
+            {/*<Privacy/>*/}
+            <Pressable onPress={() => navigation.navigate('Privacy')}>
+                <Text style={styles.linkText}>Please read our Privacy Policy.</Text>
+            </Pressable>
+            <Login/>
+        </View>
+    );
+}
+function PrivacyScreen({ navigation }) {
+
+    return (
+        <View style={{...styles.container, backgroundColor: "#CAFFCC"}}>
+            <Privacy/>
+
+        </View>
+    );
+}
 
 const Stack = createStackNavigator();
 
@@ -139,6 +168,8 @@ function MyStack() {
             <Stack.Screen name="Rewards" component={RewardsScreen} />
             <Stack.Screen name="Goals" component={GoalsScreen} />
             <Stack.Screen name="Settings" component={SettingsScreen} />
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="Privacy" component={PrivacyScreen} />
         </Stack.Navigator>
     );
 }
@@ -164,7 +195,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "column",
         //backgroundColor: '#AAD2C0',
-        paddingTop: 40,
+        //paddingTop: 20,
         //alignItems: 'center',
         justifyContent: 'space-between',
         height: "100%",
@@ -218,5 +249,14 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         minHeight: '100%',
         paddingBottom: 40,
-    }
+    },
+    link: {
+        marginBottom: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: 'blue',
+    },
+    linkText: {
+        fontSize: 16,
+        color: 'blue',
+    },
 });
