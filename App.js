@@ -36,6 +36,9 @@ const App = () => {
     }
 };
 
+/*
+homescreen with nav menu
+*/
 function HomeScreen({ navigation }) {
 
     return(
