@@ -21,6 +21,7 @@ const Login = ({navigation, setUser}) => {
 
                 // Call the setter passed to us as a prop
                 setUser(user);
+                navigation.navigate('Home');
             })
             .catch((error) => {
                 console.log(`Error: ${error.code} ${error.message}`);
@@ -31,11 +32,6 @@ const Login = ({navigation, setUser}) => {
     }
 
 
-    const handleLogin = () => {
-
-        navigation.navigate('Home');
-        loginUser()
-    };
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
@@ -55,7 +51,7 @@ const Login = ({navigation, setUser}) => {
 
             </View>
 
-            <Button title="Login" onPress={handleLogin}/>
+            <Button title="Login" onPress={loginUser}/>
         </ScrollView>
     );
 };
