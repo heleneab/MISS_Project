@@ -3,42 +3,49 @@ import {View, ScrollView, Text, StyleSheet, TouchableOpacity, Button, Alert, Tex
 
 //Firebase
 import {auth} from "../firebaseConfig";
-import {signInWithEmailAndPassword} from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 
-
-const Login = ({navigation, setUser}) => {
-
-
+const Register = ({navigation, setUser}) => {
     const [username, setUsername] = useState("test@uia.no");
     const [password, setPassword] = useState("Password1.");
 
-    const loginUser = () => {
-        signInWithEmailAndPassword(auth, username, password)
+    const [agree, setAgree] = useState(false);
+    //for the checkbox
+    const toggleAgree = () => {
+        setAgree(!agree);
+    };
+    const handleRegister = () => {
+        if (agree) {
+            // Perform the registration action
+            // ...
+            // Show a success message or navigate to the next screen
+            Alert.alert('Registration successful');
+            registerUser()
+        } else {
+            // Show an error message if the checkbox is not checked
+            Alert.alert('Error', 'Please agree to the Privacy Policy');
+        }
+    };
+    const registerUser = () => {
+        createUserWithEmailAndPassword(auth, username, password)
             .then((userCredential) => {
+                // Signed in
                 const user = userCredential.user;
-                console.log(`User has been signed in: ${user.email}`);
-
-                // Call the setter passed to us as a prop
-                setUser(user);
+                console.log(`User has been registered: ${user.email}`);
+                // ...
             })
             .catch((error) => {
                 console.log(`Error: ${error.code} ${error.message}`);
                 const errorCode = error.code;
                 const errorMessage = error.message;
+                // ..
             });
-
     }
 
 
-    const handleLogin = () => {
-
-        navigation.navigate('Home');
-        loginUser()
-    };
-
-    return (
-        <ScrollView contentContainerStyle={styles.container}>
+    return(
+        <ScrollView>
             <View>
                 <TextInput
                     style={styles.input}
@@ -52,13 +59,21 @@ const Login = ({navigation, setUser}) => {
                     secureTextEntry={true}
                     //value="Password1."
                 />
-
+                {/*<Privacy/>*/}
+                <Pressable onPress={() => navigation.navigate('Privacy')}>
+                    <Text style={styles.linkText}>Please read our Privacy Policy.</Text>
+                </Pressable>
+                <View style={styles.checkboxContainer}>
+                    <TouchableOpacity style={styles.checkbox} onPress={toggleAgree}>
+                        {agree ? <Text style={styles.checkmark}>✓</Text> : null}
+                    </TouchableOpacity>
+                    <Text style={styles.agreeText}>I agree to the Privacy Policy</Text>
+                </View>
+                <Button title="Register" onPress={handleRegister} disabled={!agree} />
             </View>
-
-            <Button title="Login" onPress={handleLogin}/>
         </ScrollView>
     );
-};
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -129,4 +144,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Login;
+export default Register;

@@ -20,6 +20,7 @@ import navigationContainer from "@react-navigation/native/src/NavigationContaine
 import Privacy from "./components/Privacy";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
+import Register from "./components/Register";
 
 
 
@@ -139,10 +140,6 @@ function SettingsScreen({ navigation }) {
                 <Text style = {styles.heading}>Hei! jeg er en setting screen</Text>
             </View>
             <Logout navigation={navigation}/>
-
-            <Pressable onPress={() => navigation.navigate('Login')}>
-                <Text style={styles.linkText}>Log ut</Text>
-            </Pressable>
         </View>
     );
 }
@@ -151,11 +148,9 @@ function LoginScreen({ navigation }) {
 
     return (
         <View style={{...styles.container, backgroundColor: "#CAFFCC"}}>
-            {/*<Privacy/>*/}
-            <Pressable onPress={() => navigation.navigate('Privacy')}>
-                <Text style={styles.linkText}>Please read our Privacy Policy.</Text>
-            </Pressable>
+
             <Login navigation={navigation} setUser={setUser}/>
+            <Register navigation={navigation} setUser={setUser}/>
         </View>
     );
 }
