@@ -10,7 +10,7 @@ import {
 import React, {useState} from 'react';
 
 // Import our components. See the components directory
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, navigationRef, onReady } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import navigationContainer from "@react-navigation/native/src/NavigationContainer";
 
@@ -65,12 +65,6 @@ function HomeScreen({ navigation }) {
                         onPress={() => navigation.navigate('Settings')}>
                         <View style={{...styles.nav_button, backgroundColor: "#CAFFCC",}}>
                             <Text style={styles.nav_button_text}>Settings</Text>
-                        </View>
-                    </Pressable>
-                    <Pressable
-                        onPress={() => navigation.navigate('Login')}>
-                        <View style={{...styles.nav_button, backgroundColor: "#CAFFCC",}}>
-                            <Text style={styles.nav_button_text}>Login</Text>
                         </View>
                     </Pressable>
 
@@ -131,6 +125,9 @@ function SettingsScreen({ navigation }) {
             <View style = {styles.header}>
                 <Text style = {styles.heading}>Hei! jeg er en setting screen</Text>
             </View>
+            <Pressable onPress={() => navigation.navigate('Login')}>
+                <Text style={styles.linkText}>Log ut</Text>
+            </Pressable>
         </View>
     );
 }
@@ -142,7 +139,7 @@ function LoginScreen({ navigation }) {
             <Pressable onPress={() => navigation.navigate('Privacy')}>
                 <Text style={styles.linkText}>Please read our Privacy Policy.</Text>
             </Pressable>
-            <Login/>
+            <Login navigation={navigation}/>
         </View>
     );
 }
@@ -161,6 +158,7 @@ const Stack = createStackNavigator();
 function MyStack() {
     return (
         <Stack.Navigator /*screenOptions={{headerShown: false}}*/>
+            <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="To-do List" component={ToDoScreen} />
             <Stack.Screen name="Diary" component={DiaryScreen} />
@@ -168,7 +166,6 @@ function MyStack() {
             <Stack.Screen name="Rewards" component={RewardsScreen} />
             <Stack.Screen name="Goals" component={GoalsScreen} />
             <Stack.Screen name="Settings" component={SettingsScreen} />
-            <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Privacy" component={PrivacyScreen} />
         </Stack.Navigator>
     );
@@ -180,7 +177,7 @@ function MyStack() {
 export default function App() {
     return (
 
-        <NavigationContainer>
+        <NavigationContainer  ref={navigationRef} onReady={onReady}>
             <MyStack />
         </NavigationContainer>
 

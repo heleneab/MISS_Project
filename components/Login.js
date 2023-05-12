@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { View, ScrollView, Text, StyleSheet, TouchableOpacity, Button, Alert } from 'react-native';
+// Example usage in another file
+import { navigationRef } from '../App';
 
-const Login = () => {
+
+
+const Login = ({navigation}) => {
     const [agree, setAgree] = useState(false);
 
     const toggleAgree = () => {
@@ -14,6 +18,7 @@ const Login = () => {
             // ...
             // Show a success message or navigate to the next screen
             Alert.alert('Registration successful');
+            navigation.navigate('Home');
         } else {
             // Show an error message if the checkbox is not checked
             Alert.alert('Error', 'Please agree to the Privacy Policy');
