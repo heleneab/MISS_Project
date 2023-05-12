@@ -19,6 +19,7 @@ import navigationContainer from "@react-navigation/native/src/NavigationContaine
 // Import our components. See the components directory
 import Privacy from "./components/Privacy";
 import Login from "./components/Login";
+import Logout from "./components/Logout";
 
 
 
@@ -28,51 +29,63 @@ homescreen with nav menu
 */
 function HomeScreen({ navigation }) {
 
-    return(
-        <SafeAreaView>
-            <ScrollView contentContainerStyle={styles.scroll_container}>
-                <View style={{...styles.container}}>
-                    <Pressable onPress={() => navigation.navigate('To-do List')}>
-                        <View style={{ ...styles.nav_button, backgroundColor: "#CBCAE3" }}>
-                            <Text style={styles.nav_button_text}>To-do List</Text>
-                        </View>
-                    </Pressable>
-                    <Pressable onPress={() => navigation.navigate('Diary')}>
-                        <View style={{ ...styles.nav_button, backgroundColor: "#BEFCFC" }}>
-                            <Text style={styles.nav_button_text}>Diary</Text>
-                        </View>
-                    </Pressable>
-                    <Pressable onPress={() => navigation.navigate('Graph')}>
-                        <View style={{ ...styles.nav_button, backgroundColor: "#FCF6BE" }}>
-                            <Text style={styles.nav_button_text}>Graph</Text>
-                        </View>
-                    </Pressable>
+    const [user, setUser] = useState(null);
+
+    // Conditionally show either the welcome component or the login component.
+    if (0/*!user*/) {
+        // Pass the setUser function as a prop to the child component, so it can set the logged-in user state.
+        navigation.navigate('Login')
+    }
+    else {
+        // Pass the currently logged-in user information to the Welcome component
+        //return <Welcome user={user}/>
+
+        return(
+            <SafeAreaView>
+                <ScrollView contentContainerStyle={styles.scroll_container}>
+                    <View style={{...styles.container}}>
+                        <Pressable onPress={() => navigation.navigate('To-do List')}>
+                            <View style={{ ...styles.nav_button, backgroundColor: "#CBCAE3" }}>
+                                <Text style={styles.nav_button_text}>To-do List</Text>
+                            </View>
+                        </Pressable>
+                        <Pressable onPress={() => navigation.navigate('Diary')}>
+                            <View style={{ ...styles.nav_button, backgroundColor: "#BEFCFC" }}>
+                                <Text style={styles.nav_button_text}>Diary</Text>
+                            </View>
+                        </Pressable>
+                        <Pressable onPress={() => navigation.navigate('Graph')}>
+                            <View style={{ ...styles.nav_button, backgroundColor: "#FCF6BE" }}>
+                                <Text style={styles.nav_button_text}>Graph</Text>
+                            </View>
+                        </Pressable>
 
 
-                    <Pressable onPress={() => navigation.navigate('Rewards')}>
-                        <View style={{ ...styles.nav_button, backgroundColor: "#FCBEBE" }}>
-                            <Text style={styles.nav_button_text}>Rewards</Text>
-                        </View>
-                    </Pressable>
+                        <Pressable onPress={() => navigation.navigate('Rewards')}>
+                            <View style={{ ...styles.nav_button, backgroundColor: "#FCBEBE" }}>
+                                <Text style={styles.nav_button_text}>Rewards</Text>
+                            </View>
+                        </Pressable>
 
-                    <Pressable
-                        onPress={() => navigation.navigate('Goals')}>
-                        <View style={{...styles.nav_button, backgroundColor: "#F8DAC4",}}>
-                            <Text style={styles.nav_button_text}>Goals</Text>
-                        </View>
-                    </Pressable>
-                    <Pressable
-                        onPress={() => navigation.navigate('Settings')}>
-                        <View style={{...styles.nav_button, backgroundColor: "#CAFFCC",}}>
-                            <Text style={styles.nav_button_text}>Settings</Text>
-                        </View>
-                    </Pressable>
+                        <Pressable
+                            onPress={() => navigation.navigate('Goals')}>
+                            <View style={{...styles.nav_button, backgroundColor: "#F8DAC4",}}>
+                                <Text style={styles.nav_button_text}>Goals</Text>
+                            </View>
+                        </Pressable>
+                        <Pressable
+                            onPress={() => navigation.navigate('Settings')}>
+                            <View style={{...styles.nav_button, backgroundColor: "#CAFFCC",}}>
+                                <Text style={styles.nav_button_text}>Settings</Text>
+                            </View>
+                        </Pressable>
 
-                </View>
-            </ScrollView>
-        </SafeAreaView>
+                    </View>
+                </ScrollView>
+            </SafeAreaView>
 
-    )
+        )
+    }
 }
 function ToDoScreen({ navigation }) {
     return (
@@ -125,6 +138,8 @@ function SettingsScreen({ navigation }) {
             <View style = {styles.header}>
                 <Text style = {styles.heading}>Hei! jeg er en setting screen</Text>
             </View>
+            <Logout navigation={navigation}/>
+
             <Pressable onPress={() => navigation.navigate('Login')}>
                 <Text style={styles.linkText}>Log ut</Text>
             </Pressable>
@@ -132,6 +147,7 @@ function SettingsScreen({ navigation }) {
     );
 }
 function LoginScreen({ navigation }) {
+    const [user, setUser] = useState(null);
 
     return (
         <View style={{...styles.container, backgroundColor: "#CAFFCC"}}>
@@ -139,7 +155,7 @@ function LoginScreen({ navigation }) {
             <Pressable onPress={() => navigation.navigate('Privacy')}>
                 <Text style={styles.linkText}>Please read our Privacy Policy.</Text>
             </Pressable>
-            <Login navigation={navigation}/>
+            <Login navigation={navigation} setUser={setUser}/>
         </View>
     );
 }
@@ -175,6 +191,7 @@ function MyStack() {
 //export default HomeScreen;
 
 export default function App() {
+
     return (
 
         <NavigationContainer  ref={navigationRef} onReady={onReady}>
