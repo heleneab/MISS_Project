@@ -6,7 +6,7 @@ import {auth} from "../firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
 
-const Register = ({navigation, setUser}) => {
+const Register = ({navigation}) => {
     const [username, setUsername] = useState("test@uia.no");
     const [password, setPassword] = useState("Password1.");
 
@@ -22,6 +22,7 @@ const Register = ({navigation, setUser}) => {
             // Show a success message or navigate to the next screen
             Alert.alert('Registration successful');
             registerUser()
+            navigation.navigate('Login');
         } else {
             // Show an error message if the checkbox is not checked
             Alert.alert('Error', 'Please agree to the Privacy Policy');
@@ -103,19 +104,20 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     input: {
-        color: "#9DBBB5",
-        fontSize: 30,
+        color: "#030303",
+        fontSize: 25,
         backgroundColor: "#FFFFFF",
         padding: 7,
         width: "70%",
         alignSelf: "center",
-        borderRadius: 9,
+        borderRadius: 10,
         //automatically sticks to the bottom
         flexDirection: "row",
         borderStyle: "solid",
         margin: 1,
-        borderWidth: 1,
+        borderWidth: 2,
         borderColor: "#9DBBB5",
+        marginTop:20
     },
     fixToText: {
         flexDirection: 'row',
@@ -131,8 +133,6 @@ const styles = StyleSheet.create({
     },
     baseText: {
         fontFamily: 'Cochin',
-
-
     },
     titleText: {
         fontSize: 20,
@@ -141,6 +141,16 @@ const styles = StyleSheet.create({
     underlineTextStyle: {
         textDecorationLine: 'underline',
         //line-through is the trick
+    },
+    link: {
+        marginBottom: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: 'blue',
+        marginLeft: 10,
+    },
+    linkText: {
+        fontSize: 16,
+        color: 'blue',
     },
 });
 
