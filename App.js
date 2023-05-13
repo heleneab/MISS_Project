@@ -148,8 +148,16 @@ function LoginScreen({ navigation }) {
 
     return (
         <View style={{...styles.container, backgroundColor: "#CAFFCC"}}>
-
             <Login navigation={navigation} setUser={setUser}/>
+        </View>
+    );
+}
+
+function RegisterScreen({ navigation }) {
+    const [user, setUser] = useState(null);
+
+    return (
+        <View style={{...styles.container, backgroundColor: "#CAFFCC"}}>
             <Register navigation={navigation} setUser={setUser}/>
         </View>
     );
@@ -170,6 +178,7 @@ function MyStack() {
     return (
         <Stack.Navigator /*screenOptions={{headerShown: false}}*/>
             <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="Register" component={RegisterScreen} />
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="To-do List" component={ToDoScreen} />
             <Stack.Screen name="Diary" component={DiaryScreen} />

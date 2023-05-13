@@ -52,6 +52,14 @@ const Login = ({navigation, setUser}) => {
             </View>
 
             <Button title="Login" onPress={loginUser}/>
+
+            <Pressable
+                onPress={() => navigation.navigate('Register')}>
+                <View>
+                    <Text style={styles.nav_text}>Dont have a user</Text>
+                </View>
+            </Pressable>
+
         </ScrollView>
     );
 };
@@ -60,6 +68,10 @@ const styles = StyleSheet.create({
     container: {
         paddingVertical: 20,
         paddingHorizontal: 16,
+    },
+    nav_text:{
+        fontSize: 30,
+        marginLeft: 20,
     },
     checkboxContainer: {
         flexDirection: 'row',
