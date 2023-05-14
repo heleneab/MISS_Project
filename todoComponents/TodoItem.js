@@ -3,6 +3,7 @@ import React, { useState, useEffect} from "react";
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons} from '@expo/vector-icons';
 import { db, doc, updateDoc, deleteDoc } from "../firebaseConfig"
+import {useRoute} from "@react-navigation/native";
 
 
 const TodoItem = (props) => {
@@ -10,8 +11,10 @@ const TodoItem = (props) => {
 
     const [isEditing, setIsEditing] = useState(false);
     const [updatedTitle, setUpdatedTitle] = useState(props.title);
+    const route = useRoute();
+    const { userId } = route.params;
     const updateIsChecked = async () => {
-        const taskRef = doc(db, "todo", props.id);
+        const taskRef = doc(db,"TodoLists", userId, "todo", props.id);
 
 // Set the "capital" field of the city 'DC'
         await updateDoc(taskRef, {
@@ -19,7 +22,7 @@ const TodoItem = (props) => {
         });
     };
     const deleteTodoItem = async () => {
-        await deleteDoc(doc(db, "todo", props.id));
+        await deleteDoc(doc(db,"TodoLists", userId, "todo", props.id));
         props.getTodoList();
     };
 
@@ -28,7 +31,7 @@ const TodoItem = (props) => {
     };
 
     const handleSaveButton = async () => {
-        const todoRef = doc(db, "todo", props.id);
+        const todoRef = doc(db,"TodoLists", userId, "todo", props.id);
         await updateDoc(todoRef, {
             title: updatedTitle,
             // Add other fields to update as needed
@@ -47,7 +50,7 @@ const TodoItem = (props) => {
     };
 
     const editTodoItem = async () => {
-        const todoRef = doc(db, "todo", props.id);
+        const todoRef = doc(db,"TodoLists", userId, "todo", props.id);
         await updateDoc(todoRef, {
             // Update the fields you want to modify
             // For example, if you want to update the title:
@@ -62,6 +65,7 @@ const TodoItem = (props) => {
         },[isChecked]);
     return (
         <View style={styles.container}>
+
             {/* checked icon */}
             <Pressable onPress={() => setIsChecked(!isChecked)}>
                 {
@@ -73,7 +77,6 @@ const TodoItem = (props) => {
                 }
 
             </Pressable>
-            {/*editing function*/}
             {isEditing ? (
                 <TextInput
                     style={styles.title}

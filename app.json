@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "AuthExample",
-    "slug": "AuthExample",
+    "name": "MISS",
+    "slug": "MISS",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/MISS.png",
     "userInterfaceStyle": "light",
     "jsEngine": "hermes",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/MISS_text.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -23,12 +23,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/MISS.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/MISS.png"
     }
   }
 }

@@ -1,22 +1,26 @@
-import {StyleSheet, Text, SafeAreaView, View, Pressable, TextInput, FlatList, ActivityIndicator} from "react-native";
+import {StyleSheet,Button, Text, SafeAreaView, View, Pressable, TextInput, FlatList, ActivityIndicator} from "react-native";
 import TodoItem from "./TodoItem";
-import { DeleteTaskList } from "./Task";
 import {AntDesign, MaterialIcons} from "@expo/vector-icons";
 import {useState, useEffect} from "react";
 
-import { db, doc, deleteDoc, getDocs, collection,query, addDoc } from "../firebaseConfig"
+import { db, doc, updateDoc, deleteDoc, getDocs, collection,query, where, addDoc } from "../firebaseConfig"
 
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native';
 
 const Todo = () => {
     const navigation = useNavigation();
     const [title,setTitle] = useState("");
     const [todoList, setTodoList] = useState([]);
+    const route = useRoute();
+    const { userId } = route.params;
+    const { userEmail } = route.params;
+
+    console.log('User ID:', userId, userEmail); // Do something with the user ID
 
     const addTodoItem = async () => {
         try {
-            const docRef = await addDoc(collection(db, "todo"), {
+            const docRef = await addDoc(collection(db,"TodoLists", userId, "todo"), {
                 title: title,
                 isChecked: false,
             });
@@ -33,7 +37,7 @@ const Todo = () => {
         console.log("getTodoList called for", title);
         try {
 
-            const querySnapshot = await getDocs(query(collection(db, "todo")));
+            const querySnapshot = await getDocs(query(collection(db,"TodoLists", userId, "todo")));
             const todoItems = querySnapshot.docs.map((doc) => ({...doc.data(), id: doc.id}));
             console.log("Todo items:", todoItems); // log the todo items to check if they are being fetched correctly
             setTodoList(todoItems);
@@ -43,10 +47,10 @@ const Todo = () => {
     };
 
     const DeleteTodoList = async () => {
-        const querySnapshot = await getDocs(collection(db, "todo"));
-        querySnapshot.docs.map((item) => deleteDoc(doc(db, "todo", item.id)));
+        const querySnapshot = await getDocs(collection(db,"TodoLists", userId, "todo"));
 
-        await getTodoList();
+        querySnapshot.docs.map((item) => deleteDoc(doc(db,"TodoLists", userId, "todo")));
+        getTodoList();
     }
 
 
@@ -71,12 +75,13 @@ const Todo = () => {
                 <FlatList
                     data={todoList}
                     renderItem={({ item }) => (
-                        <TouchableOpacity onPress={() => navigation.navigate('To-Do Task', { id: item.id, title: item.title })}>
+                        <TouchableOpacity onPress={() => navigation.navigate('To-Do Task', { id: item.id, title: item.title, userId })}>
                             <TodoItem
                                 title={item.title}
                                 isChecked={item.isChecked}
                                 id={item.id}
                                 getTodoList={getTodoList}
+                                userId={userId}
                             />
                         </TouchableOpacity>
                     )}
