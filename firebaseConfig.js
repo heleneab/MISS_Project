@@ -2,7 +2,7 @@
 // Analytics have been disabled by commenting out the relevant lines.
 
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, getDoc, getDocs, setDoc, deleteDoc, doc, updateDoc, query, where, select } from "firebase/firestore";
+import { getFirestore, collection, addDoc, getDoc, getDocs, setDoc, deleteDoc, doc, updateDoc, query, where, select} from "firebase/firestore";
 
 // import { getAnalytics } from "firebase/analytics";
 
@@ -10,13 +10,13 @@ import { getFirestore, collection, addDoc, getDoc, getDocs, setDoc, deleteDoc, d
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDz2DRsmlpg0BzFQTu-CM71niJ7BjbQ0Qk",
-  authDomain: "calendertest-7ea3c.firebaseapp.com",
-  projectId: "calendertest-7ea3c",
-  storageBucket: "calendertest-7ea3c.appspot.com",
-  messagingSenderId: "765578883948",
-  appId: "1:765578883948:web:608889549442d3e50bb949",
-  measurementId: "G-NH8JVJXQVF"
+  apiKey: "AIzaSyDZZOnbd0ZFfoDNQSZNxgs6Y3wXfp0ADGQ",
+  authDomain: "miss-6ce48.firebaseapp.com",
+  projectId: "miss-6ce48",
+  storageBucket: "miss-6ce48.appspot.com",
+  messagingSenderId: "1014794651041",
+  appId: "1:1014794651041:web:c122171e70dd46e27c77e0",
+  measurementId: "G-9CMFCQHK05"
 };
 
 // Initialize Firebase
@@ -29,5 +29,5 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 // New. Allows other modules to import the auth object
-//export { auth }
-export {db, app,auth,getFirestore, collection, addDoc, getDoc, setDoc, getDocs, deleteDoc, doc, updateDoc, query, where, select };
+export { auth }
+export {db, app,getFirestore, collection, addDoc, getDoc, setDoc, getDocs, deleteDoc, doc, updateDoc, query, where, select };
