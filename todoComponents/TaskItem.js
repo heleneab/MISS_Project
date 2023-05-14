@@ -13,9 +13,10 @@ const TaskItem = (props) => {
 
     const route = useRoute();
     const { id } = route.params;
+    const { userId } = route.params;
 
     const updateIsChecked = async () => {
-        const taskRef = doc(db, "todo", id, "tasks", props.id);
+        const taskRef = doc(db,"TodoLists", userId, "todo", id, "tasks", props.id);
 
 // Set the "capital" field of the city 'DC'
         await updateDoc(taskRef, {
@@ -25,7 +26,7 @@ const TaskItem = (props) => {
 
 
     const deleteTaskItem = async () => {
-        await deleteDoc(doc(db, "todo", id, "tasks", props.id));
+        await deleteDoc(doc(db,"TodoLists", userId, "todo", id, "tasks", props.id));
         props.getTaskList();
     };
 
@@ -35,7 +36,7 @@ const TaskItem = (props) => {
     };
 
     const handleSaveButton = async () => {
-        const todoRef = doc(db, "todo", id, "tasks", props.id);
+        const todoRef = doc(db,"TodoLists", userId, "todo", id, "tasks", props.id);
         await updateDoc(todoRef, {
             title: updatedTitle,
             // Add other fields to update as needed
@@ -54,7 +55,7 @@ const TaskItem = (props) => {
     };
 
     const editTaskItem = async () => {
-        const todoRef = doc(db, "todo", id, "tasks", props.id);
+        const todoRef = doc(db,"TodoLists", userId, "todo", id, "tasks", props.id);
         await updateDoc(todoRef, {
             // Update the fields you want to modify
             // For example, if you want to update the title:

@@ -5,19 +5,24 @@ import {useState, useEffect} from "react";
 
 import { db, doc, updateDoc, deleteDoc, getDocs, collection,query, where, addDoc } from "../firebaseConfig"
 
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native';
 
 const Todo = () => {
     const navigation = useNavigation();
     const [title,setTitle] = useState("");
     const [todoList, setTodoList] = useState([]);
+    const route = useRoute();
+    const { userId } = route.params;
+    const { userEmail } = route.params;
+
+    console.log('User ID:', userId, userEmail); // Do something with the user ID
 
     const addTodoItem = async () => {
         try {
-            const docRef = await addDoc(collection(db, "todo"), {
+            const docRef = await addDoc(collection(db,"TodoLists", userId, "todo"), {
                 title: title,
-                // isChecked: false,
+                isChecked: false,
             });
 
             console.log("Document written with ID: ", docRef.id);
@@ -32,7 +37,7 @@ const Todo = () => {
         console.log("getTodoList called for", title);
         try {
 
-            const querySnapshot = await getDocs(query(collection(db, "todo")));
+            const querySnapshot = await getDocs(query(collection(db,"TodoLists", userId, "todo")));
             const todoItems = querySnapshot.docs.map((doc) => ({...doc.data(), id: doc.id}));
             console.log("Todo items:", todoItems); // log the todo items to check if they are being fetched correctly
             setTodoList(todoItems);
@@ -42,9 +47,9 @@ const Todo = () => {
     };
 
     const DeleteTodoList = async () => {
-        const querySnapshot = await getDocs(collection(db, "todo"));
+        const querySnapshot = await getDocs(collection(db,"TodoLists", userId, "todo"));
 
-        querySnapshot.docs.map((item) => deleteDoc(doc(db, "todo", item.id)));
+        querySnapshot.docs.map((item) => deleteDoc(doc(db,"TodoLists", userId, "todo")));
         getTodoList();
     }
 
@@ -70,12 +75,13 @@ const Todo = () => {
                 <FlatList
                     data={todoList}
                     renderItem={({ item }) => (
-                        <TouchableOpacity onPress={() => navigation.navigate('To-Do Task', { id: item.id, title: item.title })}>
+                        <TouchableOpacity onPress={() => navigation.navigate('To-Do Task', { id: item.id, title: item.title, userId })}>
                             <TodoItem
                                 title={item.title}
-                                //isChecked={item.isChecked}
+                                isChecked={item.isChecked}
                                 id={item.id}
                                 getTodoList={getTodoList}
+                                userId={userId}
                             />
                         </TouchableOpacity>
                     )}

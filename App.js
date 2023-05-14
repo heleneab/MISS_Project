@@ -10,7 +10,7 @@ import {
 import React, {useState} from 'react';
 
 // Import our userComponents. See the userComponents directory
-import { NavigationContainer, navigationRef, onReady } from '@react-navigation/native';
+import {NavigationContainer, navigationRef, onReady, useRoute} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import navigationContainer from "@react-navigation/native/src/NavigationContainer";
 
@@ -32,6 +32,8 @@ homescreen with nav menu
 function HomeScreen({ navigation }) {
 
     const [user, setUser] = useState(null);
+    const route = useRoute();
+    const { userId, userEmail } = route.params;
 
     // Conditionally show either the welcome component or the login component.
     if (0/*!user*/) {
@@ -46,7 +48,7 @@ function HomeScreen({ navigation }) {
             <SafeAreaView>
                 <ScrollView contentContainerStyle={styles.scroll_container}>
                     <View style={{...styles.container}}>
-                        <Pressable onPress={() => navigation.navigate('To-do List')}>
+                        <Pressable onPress={() => navigation.navigate('To-do List', { userId, userEmail })}>
                             <View style={{ ...styles.nav_button, backgroundColor: "#CBCAE3" }}>
                                 <Text style={styles.nav_button_text}>To-do List</Text>
                             </View>

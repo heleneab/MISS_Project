@@ -5,6 +5,7 @@ import {View, ScrollView, Text, StyleSheet, TouchableOpacity, Button, Alert, Tex
 import {auth} from "../firebaseConfig";
 import {signInWithEmailAndPassword} from "firebase/auth";
 
+import { useRoute } from '@react-navigation/native';
 
 
 const Login = ({navigation, setUser}) => {
@@ -17,11 +18,13 @@ const Login = ({navigation, setUser}) => {
         signInWithEmailAndPassword(auth, username, password)
             .then((userCredential) => {
                 const user = userCredential.user;
+                const userId = user.uid; // Retrieve the user ID
+                const userEmail = user.email
                 console.log(`User has been signed in: ${user.email}`);
 
                 // Call the setter passed to us as a prop
                 setUser(user);
-                navigation.navigate('Home');
+                navigation.navigate('Home', { userId, userEmail });
             })
             .catch((error) => {
                 console.log(`Error: ${error.code} ${error.message}`);

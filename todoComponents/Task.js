@@ -24,10 +24,11 @@ const Task = () => {
     const [taskList, setTaskList] = useState([]);
     const route = useRoute();
     const { id } = route.params;
+    const { userId } = route.params;
 
     const addTask = async () => {
         try {
-            const docRef = await addDoc(collection(db, "todo", id, "tasks"), {
+            const docRef = await addDoc(collection(db,"TodoLists", userId, "todo", id, "tasks"), {
                 title: title,
                 isChecked: false,
             });
@@ -45,7 +46,7 @@ const Task = () => {
         console.log("getTaskList called for", title);
         try {
 
-            const querySnapshot = await getDocs(query(collection(db, "todo", id, "tasks")));
+            const querySnapshot = await getDocs(query(collection(db,"TodoLists", userId, "todo", id, "tasks")));
             const taskItems = querySnapshot.docs.map((doc) => ({...doc.data(), id: doc.id}));
             console.log("Task items:", taskItems); // log the todo items to check if they are being fetched correctly
             setTaskList(taskItems);
@@ -56,9 +57,9 @@ const Task = () => {
 
     const DeleteTaskList = async () => {
         try {
-            const querySnapshot = await getDocs(collection(db, "todo", id, "tasks"));
+            const querySnapshot = await getDocs(collection(db,"TodoLists", userId, "todo", id, "tasks"));
             for (const docSnap of querySnapshot.docs) {
-                await deleteDoc(doc(db, "todo", id, "tasks", docSnap.id));
+                await deleteDoc(doc(db,"TodoLists", userId, "todo", id, "tasks", docSnap.id));
             }
             getTaskList();
         } catch (error) {
@@ -95,6 +96,7 @@ const Task = () => {
                             isChecked={item.isChecked}
                             id = {item.id}
                             getTaskList={getTaskList}
+                            userId={userId}
                         />
                     )}
                 />
