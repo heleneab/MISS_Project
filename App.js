@@ -9,20 +9,21 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 
-// Import our components. See the components directory
+// Import our userComponents. See the userComponents directory
 import { NavigationContainer, navigationRef, onReady } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import navigationContainer from "@react-navigation/native/src/NavigationContainer";
 
 
 
-// Import our components. See the components directory
-import Privacy from "./components/Privacy";
-import Login from "./components/Login";
-import Logout from "./components/Logout";
-import Register from "./components/Register";
+// Import our userComponents. See the userComponents directory
+import Privacy from "./userComponents/Privacy";
+import Login from "./userComponents/Login";
+import Logout from "./userComponents/Logout";
+import Register from "./userComponents/Register";
 
-
+import Todo from "./todoComponents/Todo"
+import Task from "./todoComponents/Task";
 
 
 /*
@@ -90,11 +91,32 @@ function HomeScreen({ navigation }) {
 }
 function ToDoScreen({ navigation }) {
     return (
-        <View style={{...styles.container, backgroundColor: "#CBCAE3"}}>
-            <View style = {styles.header}>
-                <Text style = {styles.heading}>Hei! jeg er en setting screen</Text>
+
+    <SafeAreaView>
+
+        <ScrollView contentContainerStyle={styles.scroll_container}>
+            <View style={{...styles.container, backgroundColor: "#CBCAE3"}}>
+
+                <Todo navigation={navigation}/>
+
             </View>
-        </View>
+        </ScrollView>
+    </SafeAreaView>
+    );
+}
+function TaskScreen({ navigation }) {
+    return (
+
+    <SafeAreaView>
+
+        <ScrollView contentContainerStyle={styles.scroll_container}>
+            <View style={{...styles.container, backgroundColor: "#CBCAE3"}}>
+
+                <Task/>
+
+            </View>
+        </ScrollView>
+    </SafeAreaView>
     );
 }
 function DiaryScreen({ navigation }) {
@@ -172,6 +194,7 @@ function MyStack() {
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="To-do List" component={ToDoScreen} />
+            <Stack.Screen name="To-Do Task" component={TaskScreen} />
             <Stack.Screen name="Diary" component={DiaryScreen} />
             <Stack.Screen name="Graph" component={GraphScreen} />
             <Stack.Screen name="Rewards" component={RewardsScreen} />
