@@ -47,11 +47,31 @@ const Todo = () => {
     };
 
     const DeleteTodoList = async () => {
-        const querySnapshot = await getDocs(collection(db,"TodoLists", userId, "todo"));
 
-        querySnapshot.docs.map((item) => deleteDoc(doc(db,"TodoLists", userId, "todo")));
+        const querySnapshot = await getDocs(collection(db,"TodoLists", userId, "todo"));
+        for (const docSnap of querySnapshot.docs) {
+            const querySnapshot2 = await getDocs(collection(db,"TodoLists", userId, "todo", docSnap.id, "tasks"));
+            for (const docSnap2 of querySnapshot2.docs) {
+                await deleteDoc(doc(db,"TodoLists", userId, "todo", docSnap.id, "tasks", docSnap2.id));
+            }
+            await deleteDoc(doc(db,"TodoLists", userId, "todo", docSnap.id));
+        }
+
+        // querySnapshot.docs.map((item) => deleteDoc(doc(db,"TodoLists", userId, "todo", id)));
         getTodoList();
     }
+
+    const DeleteTaskList = async () => {
+        try {
+            const querySnapshot = await getDocs(collection(db,"TodoLists", userId, "todo", id, "tasks"));
+            for (const docSnap of querySnapshot.docs) {
+                await deleteDoc(doc(db,"TodoLists", userId, "todo", id, "tasks", docSnap.id));
+            }
+            getTaskList();
+        } catch (error) {
+            console.error("Error deleting task list: ", error);
+        }
+    };
 
 
     useEffect(() => {
