@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { View, ScrollView, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 const Privacy = () => {

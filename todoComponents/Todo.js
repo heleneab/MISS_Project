@@ -1,9 +1,10 @@
-import {StyleSheet,Button, Text, SafeAreaView, View, Pressable, TextInput, FlatList, ActivityIndicator} from "react-native";
+import {StyleSheet, Text, SafeAreaView, View, Pressable, TextInput, FlatList, ActivityIndicator} from "react-native";
 import TodoItem from "./TodoItem";
+import { DeleteTaskList } from "./Task";
 import {AntDesign, MaterialIcons} from "@expo/vector-icons";
 import {useState, useEffect} from "react";
 
-import { db, doc, updateDoc, deleteDoc, getDocs, collection,query, where, addDoc } from "../firebaseConfig"
+import { db, doc, deleteDoc, getDocs, collection,query, addDoc } from "../firebaseConfig"
 
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native';
@@ -17,7 +18,7 @@ const Todo = () => {
         try {
             const docRef = await addDoc(collection(db, "todo"), {
                 title: title,
-                // isChecked: false,
+                isChecked: false,
             });
 
             console.log("Document written with ID: ", docRef.id);
@@ -43,9 +44,9 @@ const Todo = () => {
 
     const DeleteTodoList = async () => {
         const querySnapshot = await getDocs(collection(db, "todo"));
-
         querySnapshot.docs.map((item) => deleteDoc(doc(db, "todo", item.id)));
-        getTodoList();
+
+        await getTodoList();
     }
 
 
@@ -73,7 +74,7 @@ const Todo = () => {
                         <TouchableOpacity onPress={() => navigation.navigate('To-Do Task', { id: item.id, title: item.title })}>
                             <TodoItem
                                 title={item.title}
-                                //isChecked={item.isChecked}
+                                isChecked={item.isChecked}
                                 id={item.id}
                                 getTodoList={getTodoList}
                             />

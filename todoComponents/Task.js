@@ -6,16 +6,14 @@ import {
     Pressable,
     TextInput,
     FlatList,
-    ActivityIndicator,
-    Alert
+    ActivityIndicator
 } from "react-native";
 import TaskItem from "./TaskItem";
 import {AntDesign, MaterialIcons} from "@expo/vector-icons";
 import React, {useState, useEffect} from "react";
-import { getDoc } from "firebase/firestore";
 import { useRoute } from '@react-navigation/native';
 
-import { db, doc, updateDoc, deleteDoc, query, setDoc, getDocs, collection, addDoc } from "../firebaseConfig"
+import { db, doc, deleteDoc, query, getDocs, collection, addDoc } from "../firebaseConfig"
 
 
 

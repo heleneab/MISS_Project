@@ -9,6 +9,8 @@ import { getFirestore, collection, addDoc, getDoc, getDocs, setDoc, deleteDoc, d
 // New
 import { getAuth } from "firebase/auth";
 
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyDZZOnbd0ZFfoDNQSZNxgs6Y3wXfp0ADGQ",
   authDomain: "miss-6ce48.firebaseapp.com",
@@ -28,6 +30,6 @@ const auth = getAuth(app);
 
 const db = getFirestore(app);
 
-// New. Allows other modules to import the auth object
+// New. Allows other modules to import the auth objectz
 export { auth }
-export {db, app,getFirestore, collection, addDoc, getDoc, setDoc, getDocs, deleteDoc, doc, updateDoc, query, where, select };
+export {db, app, getFirestore, collection, addDoc, getDoc, setDoc, getDocs, deleteDoc, doc, updateDoc, query, where, select };

@@ -6,9 +6,18 @@ import { db, doc, updateDoc, deleteDoc } from "../firebaseConfig"
 
 
 const TodoItem = (props) => {
+    const [isChecked, setIsChecked] = useState(props.isChecked);
+
     const [isEditing, setIsEditing] = useState(false);
     const [updatedTitle, setUpdatedTitle] = useState(props.title);
+    const updateIsChecked = async () => {
+        const taskRef = doc(db, "todo", props.id);
 
+// Set the "capital" field of the city 'DC'
+        await updateDoc(taskRef, {
+            isChecked: isChecked,
+        });
+    };
     const deleteTodoItem = async () => {
         await deleteDoc(doc(db, "todo", props.id));
         props.getTodoList();
@@ -48,11 +57,23 @@ const TodoItem = (props) => {
         props.getTodoList();
     };
 
-    /*    useEffect(() => {
+        useEffect(() => {
             updateIsChecked();
-        },[isChecked]);*/
+        },[isChecked]);
     return (
         <View style={styles.container}>
+            {/* checked icon */}
+            <Pressable onPress={() => setIsChecked(!isChecked)}>
+                {
+                    isChecked ? (
+                        <AntDesign name="checkcircle" size={24} color="black" />
+                    ) : (
+                        <AntDesign name="checkcircleo" size={24} color="black" />
+                    )
+                }
+
+            </Pressable>
+            {/*editing function*/}
             {isEditing ? (
                 <TextInput
                     style={styles.title}

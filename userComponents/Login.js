@@ -28,7 +28,6 @@ const Login = ({navigation, setUser}) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
             });
-
     }
 
 
