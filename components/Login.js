@@ -53,8 +53,8 @@ const Login = ({navigation, setUser}) => {
 
             <Pressable
                 onPress={loginUser}>
-                <View style={{...styles.login_button, backgroundColor: "#69B9AA",}}>
-                    <Text style={styles.login_button_text}>Log in</Text>
+                <View style={{...styles.login_button, backgroundColor: "#69B9AA"}}>
+                    <Text style={styles.login_button_text}>Log in!</Text>
                 </View>
             </Pressable>
 
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
         marginTop: 60,
         textDecorationLine: "underline",
         textAlign: "center",
-        color: "#02282f",
+        color: "#022832",
     },
     input: {
         color: "#030303",
@@ -118,8 +118,6 @@ const styles = StyleSheet.create({
         fontSize: 30,
         marginLeft: 20,
         color: "#304D47",
-        textAlign: "center",
-        alignItems: "center",
     },
     checkboxContainer: {
         flexDirection: 'row',

@@ -4,6 +4,7 @@ import {View, ScrollView, Text, StyleSheet, TouchableOpacity, Button, Alert, Tex
 //Firebase
 import {auth} from "../firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import {getBackgroundColor} from "react-native/Libraries/LogBox/UI/LogBoxStyle";
 
 
 const Register = ({navigation}) => {
@@ -44,8 +45,7 @@ const Register = ({navigation}) => {
             });
     }
 
-
-    return(
+    if(!agree) return(
         <ScrollView>
             <View>
                 <TextInput
@@ -70,7 +70,47 @@ const Register = ({navigation}) => {
                     </TouchableOpacity>
                     <Text style={styles.agreeText}>I agree to the Privacy Policy</Text>
                 </View>
-                <Button title="Register" onPress={handleRegister} disabled={!agree} />
+                <Pressable
+                    onPress={handleRegister} disabled={!agree}>
+                    <View style={{...styles.reg_button, backgroundColor: "#9fd2c5",}}>
+                        <Text style={{...styles.reg_button_text, color: "#487968"}}>Register!</Text>
+                    </View>
+                </Pressable>
+            </View>
+        </ScrollView>
+    );
+
+    else return(
+        <ScrollView>
+            <View>
+                <TextInput
+                    style={styles.input}
+                    onChangeText={setUsername}
+                    keyboardType="email-address"
+                    //value="test@uia.no"
+                />
+                <TextInput
+                    style={styles.input}
+                    onChangeText={setPassword}
+                    secureTextEntry={true}
+                    //value="Password1."
+                />
+                {/*<Privacy/>*/}
+                <Pressable onPress={() => navigation.navigate('Privacy')}>
+                    <Text style={styles.linkText}>Please read our Privacy Policy.</Text>
+                </Pressable>
+                <View style={styles.checkboxContainer}>
+                    <TouchableOpacity style={styles.checkbox} onPress={toggleAgree}>
+                        {agree ? <Text style={styles.checkmark}>✓</Text> : null}
+                    </TouchableOpacity>
+                    <Text style={styles.agreeText}>I agree to the Privacy Policy</Text>
+                </View>
+                <Pressable
+                    onPress={handleRegister} disabled={!agree}>
+                    <View style={{...styles.reg_button, backgroundColor: "#69B9AA",}}>
+                        <Text style={styles.reg_button_text}>Register!</Text>
+                    </View>
+                </Pressable>
             </View>
         </ScrollView>
     );
@@ -95,6 +135,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginVertical: 10,
+        marginLeft: 30
     },
     checkmark: {
         fontSize: 16,
@@ -102,6 +143,7 @@ const styles = StyleSheet.create({
     },
     agreeText: {
         fontSize: 16,
+        alignItems: "center"
     },
     input: {
         color: "#030303",
@@ -147,10 +189,34 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: 'blue',
         marginLeft: 10,
+        alignItems: "center",
     },
     linkText: {
         fontSize: 16,
         color: 'blue',
+        marginLeft: 30,
+        alignItems: "center",
+    },
+    reg_button: {
+        flexDirection: "row",
+        //backgroundColor: "lightblue",
+        justifyContent: "space-between",
+        padding: 7,
+        //alignItems: "center",
+        width: "70%",
+        alignSelf: "center",
+        borderRadius: 10,
+        marginVertical: 25,
+        marginBottom: 0,
+        //elevation: 30,
+        //boarder
+        borderWidth: 2,
+        borderColor: 'rgba(0, 0, 0, 0.2)',
+    },
+    reg_button_text:{
+        fontSize: 30,
+        marginLeft: 20,
+        color: "#304D47",
     },
 });
 
