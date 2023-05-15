@@ -47,28 +47,32 @@ const Register = ({navigation}) => {
 
     if(!agree) return(
         <ScrollView>
-            <View>
+            <View style={{marginTop:50}}>
                 <TextInput
                     style={styles.input}
                     onChangeText={setUsername}
                     keyboardType="email-address"
+                    placeholder="example@email.com"
                     //value="test@uia.no"
                 />
                 <TextInput
                     style={styles.input}
                     onChangeText={setPassword}
                     secureTextEntry={true}
+                    placeholder="password"
                     //value="Password1."
                 />
                 {/*<Privacy/>*/}
-                <Pressable onPress={() => navigation.navigate('Privacy')}>
-                    <Text style={styles.linkText}>Please read our Privacy Policy.</Text>
-                </Pressable>
-                <View style={styles.checkboxContainer}>
-                    <TouchableOpacity style={styles.checkbox} onPress={toggleAgree}>
-                        {agree ? <Text style={styles.checkmark}>✓</Text> : null}
-                    </TouchableOpacity>
-                    <Text style={styles.agreeText}>I agree to the Privacy Policy</Text>
+                <View style={{marginTop: 40}}>
+                    <Pressable onPress={() => navigation.navigate('Privacy')}>
+                        <Text style={styles.linkText}>Please read our Privacy Policy.</Text>
+                    </Pressable>
+                    <View style={styles.checkboxContainer}>
+                        <TouchableOpacity style={styles.checkbox} onPress={toggleAgree}>
+                            {agree ? <Text style={styles.checkmark}>✓</Text> : null}
+                        </TouchableOpacity>
+                        <Text style={styles.agreeText}>I agree to the Privacy Policy</Text>
+                    </View>
                 </View>
                 <Pressable
                     onPress={handleRegister} disabled={!agree}>
@@ -82,28 +86,32 @@ const Register = ({navigation}) => {
 
     else return(
         <ScrollView>
-            <View>
+            <View style={{marginTop:50}}>
                 <TextInput
                     style={styles.input}
                     onChangeText={setUsername}
                     keyboardType="email-address"
+                    placeholder="example@email.com"
                     //value="test@uia.no"
                 />
                 <TextInput
                     style={styles.input}
                     onChangeText={setPassword}
                     secureTextEntry={true}
+                    placeholder="password"
                     //value="Password1."
                 />
                 {/*<Privacy/>*/}
-                <Pressable onPress={() => navigation.navigate('Privacy')}>
-                    <Text style={styles.linkText}>Please read our Privacy Policy.</Text>
-                </Pressable>
-                <View style={styles.checkboxContainer}>
-                    <TouchableOpacity style={styles.checkbox} onPress={toggleAgree}>
-                        {agree ? <Text style={styles.checkmark}>✓</Text> : null}
-                    </TouchableOpacity>
-                    <Text style={styles.agreeText}>I agree to the Privacy Policy</Text>
+                <View style={{marginTop: 40}}>
+                    <Pressable onPress={() => navigation.navigate('Privacy')}>
+                        <Text style={styles.linkText}>Please read our Privacy Policy.</Text>
+                    </Pressable>
+                    <View style={styles.checkboxContainer}>
+                        <TouchableOpacity style={styles.checkbox} onPress={toggleAgree}>
+                            {agree ? <Text style={styles.checkmark}>✓</Text> : null}
+                        </TouchableOpacity>
+                        <Text style={styles.agreeText}>I agree to the Privacy Policy</Text>
+                    </View>
                 </View>
                 <Pressable
                     onPress={handleRegister} disabled={!agree}>
@@ -135,7 +143,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginVertical: 10,
-        marginLeft: 30
+        marginLeft: 60
     },
     checkmark: {
         fontSize: 16,
@@ -194,7 +202,7 @@ const styles = StyleSheet.create({
     linkText: {
         fontSize: 16,
         color: 'blue',
-        marginLeft: 30,
+        marginLeft: 60,
         alignItems: "center",
     },
     reg_button: {
