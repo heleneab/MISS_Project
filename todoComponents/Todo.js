@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
         marginRight: 20,
     },
     input: {
-        backgroundColor: "lightgray",
+        backgroundColor: '#CBCAE3',
         padding: 10,
         fontSize: 17,
         width: "90%",
