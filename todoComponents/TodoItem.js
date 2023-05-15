@@ -1,7 +1,6 @@
 import {Button, Pressable, StyleSheet, Text, View, TextInput} from "react-native";
 import React, { useState, useEffect} from "react";
-import { AntDesign } from '@expo/vector-icons';
-import { MaterialIcons} from '@expo/vector-icons';
+import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 import { db, doc, updateDoc, deleteDoc } from "../firebaseConfig"
 import {useRoute} from "@react-navigation/native";
 
@@ -49,16 +48,7 @@ const TodoItem = (props) => {
         setUpdatedTitle(text);
     };
 
-    const editTodoItem = async () => {
-        const todoRef = doc(db,"TodoLists", userId, "todo", props.id);
-        await updateDoc(todoRef, {
-            // Update the fields you want to modify
-            // For example, if you want to update the title:
-            title: "test",
-            // Add other fields to update as needed
-        });
-        props.getTodoList();
-    };
+
 
         useEffect(() => {
             updateIsChecked();

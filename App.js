@@ -24,9 +24,9 @@ import Register from "./userComponents/Register";
 
 import Todo from "./todoComponents/Todo"
 import Task from "./todoComponents/Task";
-import TaskG from "./goalsComponents/TaskG";
-import Goals from "./goalsComponents/Goals";
 
+import Goals from "./goalsComponents/Goals";
+import TaskG from "./goalsComponents/TaskG";
 
 /*
 homescreen with nav menu

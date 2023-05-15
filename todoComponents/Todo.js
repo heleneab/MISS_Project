@@ -33,8 +33,8 @@ const Todo = () => {
         getTodoList();
     };
 
-    const getTodoList = async (title) => {
-        console.log("getTodoList called for", title);
+    const getTodoList = async () => {
+
         try {
 
             const querySnapshot = await getDocs(query(collection(db,"TodoLists", userId, "todo")));
@@ -61,17 +61,6 @@ const Todo = () => {
         getTodoList();
     }
 
-    const DeleteTaskList = async () => {
-        try {
-            const querySnapshot = await getDocs(collection(db,"TodoLists", userId, "todo", id, "tasks"));
-            for (const docSnap of querySnapshot.docs) {
-                await deleteDoc(doc(db,"TodoLists", userId, "todo", id, "tasks", docSnap.id));
-            }
-            getTaskList();
-        } catch (error) {
-            console.error("Error deleting task list: ", error);
-        }
-    };
 
 
     useEffect(() => {

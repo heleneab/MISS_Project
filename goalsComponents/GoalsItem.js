@@ -49,17 +49,6 @@ const GoalsItem = (props) => {
         setUpdatedTitle(text);
     };
 
-    const editTodoItem = async () => {
-        const todoRef = doc(db,"GoalsLists", userId, "goals", props.id);
-        await updateDoc(todoRef, {
-            // Update the fields you want to modify
-            // For example, if you want to update the title:
-            title: "test",
-            // Add other fields to update as needed
-        });
-        props.getTodoList();
-    };
-
         useEffect(() => {
             updateIsChecked();
         },[isChecked]);
