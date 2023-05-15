@@ -117,7 +117,7 @@ export default TaskItem;
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
-        backgroundColor: "lightgray",
+        backgroundColor: 'rgba(255, 255, 255, 0.3)',
         justifyContent: "space-between",
         padding: 10,
         alignItems: "center",
