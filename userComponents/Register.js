@@ -45,46 +45,9 @@ const Register = ({navigation}) => {
             });
     }
 
-    if(!agree) return(
-        <ScrollView>
-            <View style={{marginTop:50}}>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={setUsername}
-                    keyboardType="email-address"
-                    placeholder="example@email.com"
-                    //value="test@uia.no"
-                />
-                <TextInput
-                    style={styles.input}
-                    onChangeText={setPassword}
-                    secureTextEntry={true}
-                    placeholder="password"
-                    //value="Password1."
-                />
-                {/*<Privacy/>*/}
-                <View style={{marginTop: 40}}>
-                    <Pressable onPress={() => navigation.navigate('Privacy')}>
-                        <Text style={styles.linkText}>Please read our Privacy Policy.</Text>
-                    </Pressable>
-                    <View style={styles.checkboxContainer}>
-                        <TouchableOpacity style={styles.checkbox} onPress={toggleAgree}>
-                            {agree ? <Text style={styles.checkmark}>✓</Text> : null}
-                        </TouchableOpacity>
-                        <Text style={styles.agreeText}>I agree to the Privacy Policy</Text>
-                    </View>
-                </View>
-                <Pressable
-                    onPress={handleRegister} disabled={!agree}>
-                    <View style={{...styles.reg_button, backgroundColor: "#9fd2c5",}}>
-                        <Text style={{...styles.reg_button_text, color: "#487968"}}>Register!</Text>
-                    </View>
-                </Pressable>
-            </View>
-        </ScrollView>
-    );
 
-    else return(
+
+    return(
         <ScrollView>
             <View style={{marginTop:50}}>
                 <TextInput
@@ -113,12 +76,22 @@ const Register = ({navigation}) => {
                         <Text style={styles.agreeText}>I agree to the Privacy Policy</Text>
                     </View>
                 </View>
-                <Pressable
-                    onPress={handleRegister} disabled={!agree}>
-                    <View style={{...styles.reg_button, backgroundColor: "#69B9AA",}}>
-                        <Text style={styles.reg_button_text}>Register!</Text>
-                    </View>
-                </Pressable>
+                {!agree ? (
+                    <Pressable
+                        onPress={handleRegister} disabled={!agree}>
+                        <View style={{...styles.reg_button, backgroundColor: "#9fd2c5",}}>
+                            <Text style={{...styles.reg_button_text, color: "#487968"}}>Register!</Text>
+                        </View>
+                    </Pressable>
+                ) : (
+                    <Pressable
+                        onPress={handleRegister} disabled={!agree}>
+                        <View style={{...styles.reg_button, backgroundColor: "#69B9AA",}}>
+                            <Text style={styles.reg_button_text}>Register!</Text>
+                        </View>
+                    </Pressable>
+                )}
+
             </View>
         </ScrollView>
     );

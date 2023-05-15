@@ -1,5 +1,5 @@
 import {StyleSheet,Button, Text, SafeAreaView, View, Pressable, TextInput, FlatList, ActivityIndicator} from "react-native";
-import TodoItem from "./TodoItem";
+import GoalsItem from "./GoalsItem";
 import {AntDesign, MaterialIcons} from "@expo/vector-icons";
 import {useState, useEffect} from "react";
 
@@ -8,7 +8,7 @@ import { db, doc, updateDoc, deleteDoc, getDocs, collection,query, where, addDoc
 import {useNavigation, useRoute} from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native';
 
-const Todo = () => {
+const Goals = () => {
     const navigation = useNavigation();
     const [title,setTitle] = useState("");
     const [todoList, setTodoList] = useState([]);
@@ -20,7 +20,7 @@ const Todo = () => {
 
     const addTodoItem = async () => {
         try {
-            const docRef = await addDoc(collection(db,"TodoLists", userId, "todo"), {
+            const docRef = await addDoc(collection(db,"GoalsLists", userId, "goals"), {
                 title: title,
                 isChecked: false,
             });
@@ -37,7 +37,7 @@ const Todo = () => {
         console.log("getTodoList called for", title);
         try {
 
-            const querySnapshot = await getDocs(query(collection(db,"TodoLists", userId, "todo")));
+            const querySnapshot = await getDocs(query(collection(db,"GoalsLists", userId, "goals")));
             const todoItems = querySnapshot.docs.map((doc) => ({...doc.data(), id: doc.id}));
             console.log("Todo items:", todoItems); // log the todo items to check if they are being fetched correctly
             setTodoList(todoItems);
@@ -48,30 +48,18 @@ const Todo = () => {
 
     const DeleteTodoList = async () => {
 
-        const querySnapshot = await getDocs(collection(db,"TodoLists", userId, "todo"));
+        const querySnapshot = await getDocs(collection(db,"GoalsLists", userId, "goals"));
         for (const docSnap of querySnapshot.docs) {
-            const querySnapshot2 = await getDocs(collection(db,"TodoLists", userId, "todo", docSnap.id, "tasks"));
+            const querySnapshot2 = await getDocs(collection(db,"GoalsLists", userId, "goals", docSnap.id, "tasks"));
             for (const docSnap2 of querySnapshot2.docs) {
-                await deleteDoc(doc(db,"TodoLists", userId, "todo", docSnap.id, "tasks", docSnap2.id));
+                await deleteDoc(doc(db,"GoalsLists", userId, "goals", docSnap.id, "tasks", docSnap2.id));
             }
-            await deleteDoc(doc(db,"TodoLists", userId, "todo", docSnap.id));
+            await deleteDoc(doc(db,"GoalsLists", userId, "goals", docSnap.id));
         }
 
         // querySnapshot.docs.map((item) => deleteDoc(doc(db,"TodoLists", userId, "todo", id)));
         getTodoList();
     }
-
-    const DeleteTaskList = async () => {
-        try {
-            const querySnapshot = await getDocs(collection(db,"TodoLists", userId, "todo", id, "tasks"));
-            for (const docSnap of querySnapshot.docs) {
-                await deleteDoc(doc(db,"TodoLists", userId, "todo", id, "tasks", docSnap.id));
-            }
-            getTaskList();
-        } catch (error) {
-            console.error("Error deleting task list: ", error);
-        }
-    };
 
 
     useEffect(() => {
@@ -82,7 +70,7 @@ const Todo = () => {
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
                 {/* heading */}
-                <Text style={styles.heading}>To-Do Lists:</Text>
+                <Text style={styles.heading}>Goals lists:</Text>
                 {/* no og shopping items */}
                 <Text style={styles.noOfItems}>{todoList.length}</Text>
                 {/* Delete all */}
@@ -98,9 +86,9 @@ const Todo = () => {
                     data={todoList}
                     renderItem={({ item }) => (
 
-                        <TouchableOpacity onPress={() => navigation.navigate('To-Do Task', { id: item.id, title: item.title, userId })}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Goals Task', { id: item.id, title: item.title, userId })}>
 
-                            <TodoItem
+                            <GoalsItem
 
                                 title={item.title}
                                 isChecked={item.isChecked}
@@ -122,7 +110,7 @@ const Todo = () => {
 
             {/* Text Input */}
             <TextInput
-                placeholder="Enter to-do"
+                placeholder="Enter goal"
                 style={styles.input}
                 value={title}
                 onChangeText={text => setTitle(text)}
@@ -132,7 +120,7 @@ const Todo = () => {
     );
 };
 
-export default Todo;
+export default Goals;
 
 const styles = StyleSheet.create({
     todoItem: {
