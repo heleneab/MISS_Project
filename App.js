@@ -46,7 +46,7 @@ function HomeScreen({ navigation }) {
 
         return(
             <SafeAreaView>
-                <ScrollView contentContainerStyle={styles.scroll_container}>
+                <ScrollView contentContainerStyle={{...styles.scroll_container, backgroundColor: "#BEFCE0"} }>
                     <View style={{...styles.container}}>
                         <Pressable onPress={() => navigation.navigate('To-do List', { userId, userEmail })}>
                             <View style={{ ...styles.nav_button, backgroundColor: "#CBCAE3" }}>
@@ -96,7 +96,7 @@ function ToDoScreen({ navigation }) {
 
     <SafeAreaView>
 
-        <ScrollView contentContainerStyle={styles.scroll_container}>
+        <ScrollView contentContainerStyle={{...styles.scroll_container, backgroundColor: "#CBCAE3"}}>
             <View style={{...styles.container, backgroundColor: "#CBCAE3"}}>
 
                 <Todo navigation={navigation}/>
@@ -111,7 +111,7 @@ function TaskScreen({ navigation }) {
 
     <SafeAreaView>
 
-        <ScrollView contentContainerStyle={styles.scroll_container}>
+        <ScrollView contentContainerStyle={{...styles.scroll_container, backgroundColor: "#CBCAE3"}}>
             <View style={{...styles.container, backgroundColor: "#CBCAE3"}}>
 
                 <Task/>
@@ -278,7 +278,7 @@ const styles = StyleSheet.create({
         marginTop: "auto",
     },
     scroll_container: {
-        backgroundColor: "#BEFCE0",
+        // backgroundColor: "#BEFCE0",
         paddingTop: 40,
         justifyContent: 'space-between',
         minHeight: '100%',

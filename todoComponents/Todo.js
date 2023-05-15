@@ -128,7 +128,7 @@ export default Todo;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        // backgroundColor: '#fff',
     },
     header: {
         flexDirection: "row",
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
         marginRight: 20,
     },
     input: {
-        backgroundColor: '#CBCAE3',
+        backgroundColor: '#fff',
         padding: 10,
         fontSize: 17,
         width: "90%",
