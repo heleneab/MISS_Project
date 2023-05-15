@@ -92,21 +92,30 @@ const Todo = () => {
             </View>
             {/* Flatlist */}
             {todoList.length > 0 ? (
+
+
                 <FlatList
                     data={todoList}
                     renderItem={({ item }) => (
+
                         <TouchableOpacity onPress={() => navigation.navigate('To-Do Task', { id: item.id, title: item.title, userId })}>
+
                             <TodoItem
+
                                 title={item.title}
                                 isChecked={item.isChecked}
                                 id={item.id}
                                 getTodoList={getTodoList}
                                 userId={userId}
+
                             />
+
                         </TouchableOpacity>
                     )}
                     keyExtractor={(item) => item.id}
                 />
+
+
             ) : (
                 <ActivityIndicator />
             )}
@@ -126,9 +135,17 @@ const Todo = () => {
 export default Todo;
 
 const styles = StyleSheet.create({
+    todoItem: {
+        backgroundColor: '#FFFFFF',
+        padding: 10,
+        marginVertical: 5,
+        borderRadius: 10,
+    },
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        // backgroundColor: '#fff',
+
+
     },
     header: {
         flexDirection: "row",
@@ -138,6 +155,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         marginBottom: 10,
+
     },
     heading: {
         fontSize: 30,
@@ -150,7 +168,7 @@ const styles = StyleSheet.create({
         marginRight: 20,
     },
     input: {
-        backgroundColor: "lightgray",
+        backgroundColor: '#fff',
         padding: 10,
         fontSize: 17,
         width: "90%",

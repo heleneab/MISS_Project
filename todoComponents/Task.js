@@ -75,7 +75,7 @@ const Task = () => {
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
                 {/* heading */}
-                <Text style={styles.heading}>To-Do: </Text>
+                <Text style={styles.heading}>{route.params.title}</Text>
                 {/* no og shopping items */}
                 <Text style={styles.noOfItems}>{taskList.length}</Text>
                 {/* Delete all */}
@@ -121,7 +121,7 @@ export default Task;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+
     },
     header: {
         flexDirection: "row",
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
         marginRight: 20,
     },
     input: {
-        backgroundColor: "lightgray",
+        backgroundColor: 'rgba(255, 255, 255, 1)',
         padding: 10,
         fontSize: 17,
         width: "90%",

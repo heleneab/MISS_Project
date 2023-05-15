@@ -109,7 +109,7 @@ export default TodoItem;
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
-        backgroundColor: "lightgray",
+        backgroundColor: "#FFFFFF",
         justifyContent: "space-between",
         padding: 10,
         alignItems: "center",
