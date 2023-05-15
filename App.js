@@ -182,7 +182,7 @@ function SettingsScreen({ navigation }) {
     return (
         <View style={{...styles.container, backgroundColor: "#CAFFCC"}}>
             <View style = {styles.header}>
-                <Text style = {styles.heading}>Hei! jeg er en setting screen</Text>
+
             </View>
             <Logout navigation={navigation}/>
         </View>

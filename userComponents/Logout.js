@@ -2,7 +2,7 @@ import {signOut, deleteUser} from "firebase/auth";
 import {auth} from "../firebaseConfig";
 
 import React, { useState } from 'react';
-import {View, ScrollView, Text, StyleSheet, TouchableOpacity, Button, Alert, TextInput, Pressable} from 'react-native';
+import {View, ScrollView, Text, StyleSheet, SafeAreaView, TouchableOpacity, Button, Alert, TextInput, Pressable} from 'react-native';
 
 
 const Logout = ({navigation, setUser}) => {
@@ -32,11 +32,53 @@ const Logout = ({navigation, setUser}) => {
 
 
     return(
-        <View>
-            <Button title="Delete User" onPress={deleteAccount} />
-            <Button title="Log Out" onPress={logoutUser} />
-        </View>
+        <SafeAreaView style={styles.container}>
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity style={styles.button} onPress={deleteAccount}>
+                    <Text style={styles.buttonText}>Delete User</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={logoutUser}>
+                    <Text style={styles.buttonText}>Log Out</Text>
+                </TouchableOpacity>
+            </View>
+        </SafeAreaView>
     );
 }
 
 export default Logout
+const styles = StyleSheet.create({
+
+    container: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        padding: 10,
+        alignItems: "center",
+        width: "90%",
+        alignSelf: "center",
+        borderRadius: 10,
+        marginVertical: 10,
+    },
+
+    buttonContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        width: "90%",
+
+    },
+    button: {
+        paddingVertical: 12,
+        //paddingHorizontal: 90,
+        width: "70%",
+        borderRadius: 10,
+        backgroundColor: '#FFFFFF',
+        marginVertical: 15,
+        elevation: 10,
+    },
+    buttonText: {
+        color: '#304D47',
+        fontSize: 18,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+});
