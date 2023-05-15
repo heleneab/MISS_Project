@@ -63,14 +63,11 @@ function HomeScreen({ navigation }) {
                                 <Text style={styles.nav_button_text}>Graph</Text>
                             </View>
                         </Pressable>
-
-
                         <Pressable onPress={() => navigation.navigate('Rewards')}>
                             <View style={{ ...styles.nav_button, backgroundColor: "#FCBEBE" }}>
                                 <Text style={styles.nav_button_text}>Rewards</Text>
                             </View>
                         </Pressable>
-
                         <Pressable
                             onPress={() => navigation.navigate('Goals')}>
                             <View style={{...styles.nav_button, backgroundColor: "#F8DAC4",}}>
@@ -171,9 +168,17 @@ function LoginScreen({ navigation }) {
     const [user, setUser] = useState(null);
 
     return (
-        <View style={{...styles.container, backgroundColor: "#CAFFCC"}}>
-
+        <View style={{...styles.container, backgroundColor: "#BEFCE0"}}>
             <Login navigation={navigation} setUser={setUser}/>
+        </View>
+    );
+}
+
+function RegisterScreen({ navigation }) {
+    const [user, setUser] = useState(null);
+
+    return (
+        <View style={{...styles.container, backgroundColor: "#BEFCE0"}}>
             <Register navigation={navigation} setUser={setUser}/>
         </View>
     );
@@ -194,6 +199,7 @@ function MyStack() {
     return (
         <Stack.Navigator /*screenOptions={{headerShown: false}}*/>
             <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="Register" component={RegisterScreen} />
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="To-do List" component={ToDoScreen} />
             <Stack.Screen name="To-Do Task" component={TaskScreen} />

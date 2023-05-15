@@ -4,9 +4,10 @@ import {View, ScrollView, Text, StyleSheet, TouchableOpacity, Button, Alert, Tex
 //Firebase
 import {auth} from "../firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import {getBackgroundColor} from "react-native/Libraries/LogBox/UI/LogBoxStyle";
 
 
-const Register = ({navigation, setUser}) => {
+const Register = ({navigation}) => {
     const [username, setUsername] = useState("test@uia.no");
     const [password, setPassword] = useState("Password1.");
 
@@ -22,6 +23,7 @@ const Register = ({navigation, setUser}) => {
             // Show a success message or navigate to the next screen
             Alert.alert('Registration successful');
             registerUser()
+            navigation.navigate('Login');
         } else {
             // Show an error message if the checkbox is not checked
             Alert.alert('Error', 'Please agree to the Privacy Policy');
@@ -43,33 +45,80 @@ const Register = ({navigation, setUser}) => {
             });
     }
 
-
-    return(
+    if(!agree) return(
         <ScrollView>
-            <View>
+            <View style={{marginTop:50}}>
                 <TextInput
                     style={styles.input}
                     onChangeText={setUsername}
                     keyboardType="email-address"
+                    placeholder="example@email.com"
                     //value="test@uia.no"
                 />
                 <TextInput
                     style={styles.input}
                     onChangeText={setPassword}
                     secureTextEntry={true}
+                    placeholder="password"
                     //value="Password1."
                 />
                 {/*<Privacy/>*/}
-                <Pressable onPress={() => navigation.navigate('Privacy')}>
-                    <Text style={styles.linkText}>Please read our Privacy Policy.</Text>
-                </Pressable>
-                <View style={styles.checkboxContainer}>
-                    <TouchableOpacity style={styles.checkbox} onPress={toggleAgree}>
-                        {agree ? <Text style={styles.checkmark}>✓</Text> : null}
-                    </TouchableOpacity>
-                    <Text style={styles.agreeText}>I agree to the Privacy Policy</Text>
+                <View style={{marginTop: 40}}>
+                    <Pressable onPress={() => navigation.navigate('Privacy')}>
+                        <Text style={styles.linkText}>Please read our Privacy Policy.</Text>
+                    </Pressable>
+                    <View style={styles.checkboxContainer}>
+                        <TouchableOpacity style={styles.checkbox} onPress={toggleAgree}>
+                            {agree ? <Text style={styles.checkmark}>✓</Text> : null}
+                        </TouchableOpacity>
+                        <Text style={styles.agreeText}>I agree to the Privacy Policy</Text>
+                    </View>
                 </View>
-                <Button title="Register" onPress={handleRegister} disabled={!agree} />
+                <Pressable
+                    onPress={handleRegister} disabled={!agree}>
+                    <View style={{...styles.reg_button, backgroundColor: "#9fd2c5",}}>
+                        <Text style={{...styles.reg_button_text, color: "#487968"}}>Register!</Text>
+                    </View>
+                </Pressable>
+            </View>
+        </ScrollView>
+    );
+
+    else return(
+        <ScrollView>
+            <View style={{marginTop:50}}>
+                <TextInput
+                    style={styles.input}
+                    onChangeText={setUsername}
+                    keyboardType="email-address"
+                    placeholder="example@email.com"
+                    //value="test@uia.no"
+                />
+                <TextInput
+                    style={styles.input}
+                    onChangeText={setPassword}
+                    secureTextEntry={true}
+                    placeholder="password"
+                    //value="Password1."
+                />
+                {/*<Privacy/>*/}
+                <View style={{marginTop: 40}}>
+                    <Pressable onPress={() => navigation.navigate('Privacy')}>
+                        <Text style={styles.linkText}>Please read our Privacy Policy.</Text>
+                    </Pressable>
+                    <View style={styles.checkboxContainer}>
+                        <TouchableOpacity style={styles.checkbox} onPress={toggleAgree}>
+                            {agree ? <Text style={styles.checkmark}>✓</Text> : null}
+                        </TouchableOpacity>
+                        <Text style={styles.agreeText}>I agree to the Privacy Policy</Text>
+                    </View>
+                </View>
+                <Pressable
+                    onPress={handleRegister} disabled={!agree}>
+                    <View style={{...styles.reg_button, backgroundColor: "#69B9AA",}}>
+                        <Text style={styles.reg_button_text}>Register!</Text>
+                    </View>
+                </Pressable>
             </View>
         </ScrollView>
     );
@@ -94,6 +143,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginVertical: 10,
+        marginLeft: 60
     },
     checkmark: {
         fontSize: 16,
@@ -101,21 +151,23 @@ const styles = StyleSheet.create({
     },
     agreeText: {
         fontSize: 16,
+        alignItems: "center"
     },
     input: {
-        color: "#9DBBB5",
-        fontSize: 30,
+        color: "#030303",
+        fontSize: 25,
         backgroundColor: "#FFFFFF",
         padding: 7,
         width: "70%",
         alignSelf: "center",
-        borderRadius: 9,
+        borderRadius: 10,
         //automatically sticks to the bottom
         flexDirection: "row",
         borderStyle: "solid",
         margin: 1,
-        borderWidth: 1,
+        borderWidth: 2,
         borderColor: "#9DBBB5",
+        marginTop:20
     },
     fixToText: {
         flexDirection: 'row',
@@ -131,8 +183,6 @@ const styles = StyleSheet.create({
     },
     baseText: {
         fontFamily: 'Cochin',
-
-
     },
     titleText: {
         fontSize: 20,
@@ -141,6 +191,40 @@ const styles = StyleSheet.create({
     underlineTextStyle: {
         textDecorationLine: 'underline',
         //line-through is the trick
+    },
+    link: {
+        marginBottom: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: 'blue',
+        marginLeft: 10,
+        alignItems: "center",
+    },
+    linkText: {
+        fontSize: 16,
+        color: 'blue',
+        marginLeft: 60,
+        alignItems: "center",
+    },
+    reg_button: {
+        flexDirection: "row",
+        //backgroundColor: "lightblue",
+        justifyContent: "space-between",
+        padding: 7,
+        //alignItems: "center",
+        width: "70%",
+        alignSelf: "center",
+        borderRadius: 10,
+        marginVertical: 25,
+        marginBottom: 0,
+        //elevation: 30,
+        //boarder
+        borderWidth: 2,
+        borderColor: 'rgba(0, 0, 0, 0.2)',
+    },
+    reg_button_text:{
+        fontSize: 30,
+        marginLeft: 20,
+        color: "#304D47",
     },
 });
 
