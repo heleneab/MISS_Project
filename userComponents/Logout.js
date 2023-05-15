@@ -1,4 +1,4 @@
-import {signOut} from "firebase/auth";
+import {signOut, deleteUser} from "firebase/auth";
 import {auth} from "../firebaseConfig";
 
 import React, { useState } from 'react';
@@ -6,6 +6,7 @@ import {View, ScrollView, Text, StyleSheet, TouchableOpacity, Button, Alert, Tex
 
 
 const Logout = ({navigation, setUser}) => {
+    const user = auth.currentUser;
     const logoutUser = () => {
         signOut(auth).then(() => {
             // Sign-out successful.
@@ -16,8 +17,25 @@ const Logout = ({navigation, setUser}) => {
             console.log(`Error: ${error.code} ${error.message}`);
         });
     }
+
+
+    const deleteAccount = async () => {
+        deleteUser(user).then(() => {
+            // User deleted.
+            navigation.navigate('Login')
+        }).catch((error) => {
+            // An error ocurred
+            console.log(`Error: ${error.code} ${error.message}`);
+        });
+    };
+
+
+
     return(
-        <Button title="Log Out" onPress={logoutUser} />
+        <View>
+            <Button title="Delete User" onPress={deleteAccount} />
+            <Button title="Log Out" onPress={logoutUser} />
+        </View>
     );
 }
 
