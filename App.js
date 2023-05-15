@@ -24,6 +24,8 @@ import Register from "./userComponents/Register";
 
 import Todo from "./todoComponents/Todo"
 import Task from "./todoComponents/Task";
+import TaskG from "./goalsComponents/TaskG";
+import Goals from "./goalsComponents/Goals";
 
 
 /*
@@ -69,7 +71,7 @@ function HomeScreen({ navigation }) {
                             </View>
                         </Pressable>
                         <Pressable
-                            onPress={() => navigation.navigate('Goals')}>
+                            onPress={() => navigation.navigate('Goals List',{userId})}>
                             <View style={{...styles.nav_button, backgroundColor: "#F8DAC4",}}>
                                 <Text style={styles.nav_button_text}>Goals</Text>
                             </View>
@@ -118,6 +120,37 @@ function TaskScreen({ navigation }) {
     </SafeAreaView>
     );
 }
+
+function GoalsScreen({ navigation }) {
+    return (
+        <SafeAreaView>
+
+            <ScrollView contentContainerStyle={{...styles.scroll_container, backgroundColor: "#F8DAC4"}}>
+                <View style={{...styles.container, backgroundColor: "#F8DAC4"}}>
+
+                    <Goals navigation={navigation}/>
+
+                </View>
+            </ScrollView>
+        </SafeAreaView>
+    );
+}
+
+function TaskGScreen({ navigation }) {
+    return (
+        <SafeAreaView>
+
+            <ScrollView contentContainerStyle={{...styles.scroll_container, backgroundColor: "#F8DAC4"}}>
+                <View style={{...styles.container, backgroundColor: "#F8DAC4"}}>
+
+                    <TaskG/>
+
+                </View>
+            </ScrollView>
+        </SafeAreaView>
+    );
+}
+
 function DiaryScreen({ navigation }) {
     return (
         <View style={{...styles.container, backgroundColor: "#BEFCFC"}}>
@@ -139,15 +172,6 @@ function GraphScreen({ navigation }) {
 function RewardsScreen({ navigation }) {
     return (
         <View style={{...styles.container, backgroundColor: "#FCBEBE"}}>
-            <View style = {styles.header}>
-                <Text style = {styles.heading}>Hei! jeg er en setting screen</Text>
-            </View>
-        </View>
-    );
-}
-function GoalsScreen({ navigation }) {
-    return (
-        <View style={{...styles.container, backgroundColor: "#F8DAC4"}}>
             <View style = {styles.header}>
                 <Text style = {styles.heading}>Hei! jeg er en setting screen</Text>
             </View>
@@ -203,10 +227,11 @@ function MyStack() {
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="To-do List" component={ToDoScreen} />
             <Stack.Screen name="To-Do Task" component={TaskScreen} />
+            <Stack.Screen name="Goals List" component={GoalsScreen} />
+            <Stack.Screen name="Goals Task" component={TaskGScreen} />
             <Stack.Screen name="Diary" component={DiaryScreen} />
             <Stack.Screen name="Graph" component={GraphScreen} />
             <Stack.Screen name="Rewards" component={RewardsScreen} />
-            <Stack.Screen name="Goals" component={GoalsScreen} />
             <Stack.Screen name="Settings" component={SettingsScreen} />
             <Stack.Screen name="Privacy" component={PrivacyScreen} />
         </Stack.Navigator>
