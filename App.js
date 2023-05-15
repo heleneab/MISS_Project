@@ -224,7 +224,7 @@ function MyStack() {
         <Stack.Navigator /*screenOptions={{headerShown: false}}*/>
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Register" component={RegisterScreen} />
-            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Home" component={HomeScreen} options={{ headerLeft: null }} />
             <Stack.Screen name="To-do List" component={ToDoScreen} />
             <Stack.Screen name="To-Do Task" component={TaskScreen} />
             <Stack.Screen name="Goals List" component={GoalsScreen} />
