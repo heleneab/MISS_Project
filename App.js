@@ -49,6 +49,9 @@ function HomeScreen({ navigation }) {
         return(
             <SafeAreaView>
                 <ScrollView contentContainerStyle={{...styles.scroll_container, backgroundColor: "#BEFCE0"} }>
+                    <View style = {styles.header}>
+                        <Text style = {{...styles.heading, textAlign:"center"}}>Welcome! {userEmail}</Text>
+                    </View>
                     <View style={{...styles.container}}>
                         <Pressable onPress={() => navigation.navigate('To-do List', { userId, userEmail })}>
                             <View style={{ ...styles.nav_button, backgroundColor: "#CBCAE3" }}>
@@ -155,7 +158,7 @@ function DiaryScreen({ navigation }) {
     return (
         <View style={{...styles.container, backgroundColor: "#BEFCFC"}}>
             <View style = {styles.header}>
-                <Text style = {styles.heading}>Hei! jeg er en setting screen</Text>
+                <Text style = {styles.heading}>Coming Soon!</Text>
             </View>
         </View>
     );
@@ -164,7 +167,7 @@ function GraphScreen({ navigation }) {
     return (
         <View style={{...styles.container, backgroundColor: "#FCF6BE"}}>
             <View style = {styles.header}>
-                <Text style = {styles.heading}>Hei! jeg er en setting screen</Text>
+                <Text style = {styles.heading}>Coming Soon!</Text>
             </View>
         </View>
     );
@@ -173,7 +176,7 @@ function RewardsScreen({ navigation }) {
     return (
         <View style={{...styles.container, backgroundColor: "#FCBEBE"}}>
             <View style = {styles.header}>
-                <Text style = {styles.heading}>Hei! jeg er en setting screen</Text>
+                <Text style = {styles.heading}>Coming Soon!</Text>
             </View>
         </View>
     );
@@ -181,9 +184,7 @@ function RewardsScreen({ navigation }) {
 function SettingsScreen({ navigation }) {
     return (
         <View style={{...styles.container, backgroundColor: "#CAFFCC"}}>
-            <View style = {styles.header}>
 
-            </View>
             <Logout navigation={navigation}/>
         </View>
     );
@@ -224,7 +225,7 @@ function MyStack() {
         <Stack.Navigator /*screenOptions={{headerShown: false}}*/>
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Register" component={RegisterScreen} />
-            <Stack.Screen name="Home" component={HomeScreen} options={{ headerLeft: null }} />
+            <Stack.Screen name="Home" component={HomeScreen} options={{ headerLeft: null, headerShown: false }} />
             <Stack.Screen name="To-do List" component={ToDoScreen} />
             <Stack.Screen name="To-Do Task" component={TaskScreen} />
             <Stack.Screen name="Goals List" component={GoalsScreen} />
@@ -282,6 +283,8 @@ const styles = StyleSheet.create({
         //backgroundColor: "red",
         fontWeight: "500",
         flex: 1,
+        color: 'rgba(0, 0, 0, 0.7)'
+        //color: '#304D47',
     },
 
     nav_button: {
@@ -299,10 +302,12 @@ const styles = StyleSheet.create({
         //boarder
         borderWidth: 2,
         borderColor: 'rgba(0, 0, 0, 0.2)',
+
     },
     nav_button_text:{
         fontSize: 30,
         marginLeft: 20,
+        color: 'rgba(0, 0, 0, 0.7)'
     },
     inputs: {
         //flexDirection: "row",
@@ -310,7 +315,7 @@ const styles = StyleSheet.create({
     },
     scroll_container: {
         // backgroundColor: "#BEFCE0",
-        paddingTop: 40,
+        paddingTop: 60,
         justifyContent: 'space-between',
         minHeight: '100%',
         paddingBottom: 40,
