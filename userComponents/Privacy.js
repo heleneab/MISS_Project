@@ -9,7 +9,7 @@ const Privacy = () => {
             <View style={styles.contentContainer}>
                 <Text style={styles.subtitle}>Introduction</Text>
                 <Text style={styles.paragraph}>
-                    We at MISS take your privacy seriously. This policy explains how we collect, use, disclose, and safeguard your information when you use our mobile application (the "Application"). Please read this policy carefully before using the Application.
+                    We at MISS take your privacy seriously. This policy explains how we collect, use, disclose, and safeguard your information when you use our mobile application, MISS. Please read this policy carefully before using the Application.
                 </Text>
                 <Text style={styles.subtitle}>Information Collection</Text>
                 <Text style={styles.paragraph}>
@@ -33,7 +33,7 @@ const Privacy = () => {
                 </Text>
                 <Text style={styles.subtitle}>Contact Us</Text>
                 <Text style={styles.paragraph}>
-                    If you have any questions or concerns about this policy, please contact us at support@missapp.com.
+                    If you have any questions or concerns about this policy, please don't.
                 </Text>
             </View>
 

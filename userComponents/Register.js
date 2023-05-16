@@ -8,8 +8,8 @@ import {getBackgroundColor} from "react-native/Libraries/LogBox/UI/LogBoxStyle";
 
 
 const Register = ({navigation}) => {
-    const [username, setUsername] = useState("test@uia.no");
-    const [password, setPassword] = useState("Password1.");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
     const [agree, setAgree] = useState(false);
     //for the checkbox

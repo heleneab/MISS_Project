@@ -9,8 +9,8 @@ import { useRoute } from '@react-navigation/native';
 
 
 const Login = ({navigation, setUser}) => {
-    const [username, setUsername] = useState("test@uia.no");
-    const [password, setPassword] = useState("Password1.");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
     const loginUser = () => {
         signInWithEmailAndPassword(auth, username, password)

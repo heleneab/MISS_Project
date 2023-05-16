@@ -184,7 +184,9 @@ function RewardsScreen({ navigation }) {
 function SettingsScreen({ navigation }) {
     return (
         <View style={{...styles.container, backgroundColor: "#CAFFCC"}}>
-
+            <Pressable  style={{paddingTop:40, paddingHorizontal:10}} onPress={() => navigation.navigate('Privacy')}>
+                <Text style={styles.linkText}>Read our Privacy Policy here.</Text>
+            </Pressable>
             <Logout navigation={navigation}/>
         </View>
     );
